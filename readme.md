@@ -13,8 +13,8 @@ TypeLite Plus has been recompiled for .NET Standard 2.0, so it can be used in al
 ## Installation
 
 TypeLite Plus comes has 3 NuGet packages. In most cases, you'll just add the `TypeLitePlus` metapackage to your project. That package references the following packages:
-- `TypeLite.Core`: the core library that contains all of the generator logic and attributes.
-- `TypeLite.T4Templates`: contains the Example T4 template and the Manager.ttinclude file.
+- `TypeLitePlus.Core`: the core library that contains all of the generator logic and attributes.
+- `TypeLitePlus.T4Templates`: contains the Example T4 template and the Manager.ttinclude file.
 
 ## Upgrading from TypeLITE
 
