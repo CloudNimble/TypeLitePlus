@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;netcoreapp2.1</TargetFrameworks>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TypeLitePlus.Core\TypeLitePlus.Core.csproj" />
+    <ProjectReference Include="..\TypeLitePlus.T4Templates\TypeLitePlus.T4Templates.csproj" />
+  </ItemGroup>
+
+</Project>

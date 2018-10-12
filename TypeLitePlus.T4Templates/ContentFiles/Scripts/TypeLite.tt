@@ -1,0 +1,23 @@
+﻿<#@ template debug="false" hostspecific="True" language="C#" #>
+<#@ assembly name="netstandard.dll" #>
+<#@ assembly name="$(TargetDir)TypeLitePlus.dll" #>
+<#@ assembly name="$(TargetDir)$(TargetFileName)" #>
+
+<#@ import namespace="TypeLitePlus" #> 
+<#@output extension=".d.ts"#>
+
+<#@include file="Manager.ttinclude"#>
+<# var manager = EntityFrameworkTemplateFileManager.Create(this); #>
+
+<# var ts = TypeScript.Definitions()
+		.WithReference("Enums.ts");
+#>
+
+<#= ts.Generate(TsGeneratorOutput.Properties) #>
+
+<# manager.StartNewFile("Enums.ts"); #>
+<#= ts.Generate(TsGeneratorOutput.Enums) #>
+<#
+manager.EndBlock();
+manager.Process(true);
+#>

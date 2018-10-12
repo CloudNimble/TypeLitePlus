@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;netcoreapp2.1</TargetFrameworks>
+    <Authors>Lukas Kabrt, Robert McLaws, and contributors.</Authors>
+    <Version>2.0.0</Version>
+    <Description>Generates TypeScript classes or interfaces from .Net Standard 2.0 classes.</Description>
+    <Copyright>Copyright &amp;copy; 2018 Lukas Kabrt, Robert McLaws, and CloudNimble, Inc.</Copyright>
+    <PackageProjectUrl>http://type.litesolutions.net</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/CloudNimble/TypeLitePlus</RepositoryUrl>
+    <PackageTags>TypeScript, TypeLite, d.ts</PackageTags>
+    <PackageLicenseUrl>https://choosealicense.com/licenses/mit/</PackageLicenseUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="ContentFiles\Scripts\Manager.ttinclude" />
+    <None Remove="ContentFiles\Scripts\TypeLite.tt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="ContentFiles\Scripts\Manager.ttinclude" />
+    <Content Include="ContentFiles\Scripts\TypeLite.tt">
+      <Generator>None</Generator>
+      <LastGenOutput>TypeLite.d.ts</LastGenOutput>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TypeLitePlus.Core\TypeLitePlus.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+</Project>

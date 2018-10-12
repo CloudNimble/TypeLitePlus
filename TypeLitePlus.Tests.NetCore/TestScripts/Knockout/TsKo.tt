@@ -1,0 +1,26 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ assembly name="netstandard.dll" #>
+<#@ assembly name="$(TargetDir)TypeLitePlus.Core.dll" #>
+<#@ assembly name="$(TargetDir)TypeLitePlus.Tests.NetCore.dll" #>
+
+<#@ import namespace="TypeLitePlus" #> 
+<#@ import namespace="TypeLitePlus.Tests.NetCore.TestModels" #> 
+<#@output extension=".d.ts"#>
+
+<#@include file="..\..\..\TypeLitePlus.T4Templates\ContentFiles\Scripts\Manager.ttinclude"#>
+<#
+var fileManager = EntityFrameworkTemplateFileManager.Create(this); 
+
+var ts = TypeScript.Definitions(new TypeLitePlus.AlternateGenerators.TsKnockoutModelGenerator())
+	.WithReference("Enums.ts")
+	.For<Employee>();
+#>
+
+<#= ts.Generate(TsGeneratorOutput.Properties | TsGeneratorOutput.Fields) #>
+
+<# fileManager.StartNewFile("Enums.ts"); #>
+<#= ts.Generate(TsGeneratorOutput.Enums | TsGeneratorOutput.Constants) #>
+<# 
+fileManager.EndBlock(); 
+fileManager.Process(true);
+#>

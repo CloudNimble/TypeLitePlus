@@ -1,0 +1,49 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <IsPackable>false</IsPackable>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
+    <PackageReference Include="Moq" Version="4.10.0" />
+    <PackageReference Include="xunit" Version="2.4.1-pre.build.4071" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1-pre.build.4071">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TypeLitePlus.Core\TypeLitePlus.Core.csproj" />
+    <ProjectReference Include="..\TypeLitePlus.Tests.AssemblyWithEnum\TypeLitePlus.Tests.AssemblyWithEnum.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="TestScripts\Knockout\TsKo.d.ts">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TsKo.tt</DependentUpon>
+    </None>
+    <None Update="TestScripts\Knockout\TsKo.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TsKo.d.ts</LastGenOutput>
+    </None>
+    <None Update="TestScripts\TsUtils.d.ts">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TsUtils.tt</DependentUpon>
+    </None>
+    <None Update="TestScripts\TsUtils.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TsUtils.d.ts</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+</Project>

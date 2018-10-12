@@ -1,0 +1,67 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28124.53
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{6F2E8A09-FDC7-48C9-AD7F-F101D03A6741}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EEE2AFA0-BFF3-433C-B72C-E9BE1598D017}"
+	ProjectSection(SolutionItems) = preProject
+		readme.md = readme.md
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypeLitePlus.Core", "TypeLitePlus.Core\TypeLitePlus.Core.csproj", "{1B55F4A6-E57C-4E5C-9186-85FCF4BE0FF0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypeLitePlus.T4Templates", "TypeLitePlus.T4Templates\TypeLitePlus.T4Templates.csproj", "{BED54B17-3AE3-4F41-92BE-346AACB6E504}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypeLitePlus.Tests.NetCore", "TypeLitePlus.Tests.NetCore\TypeLitePlus.Tests.NetCore.csproj", "{F929AA37-6D8D-4D48-84D6-ED36F5929425}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{33ACD6E6-0ADF-4372-932C-0CEE767B3287}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TypeLitePlus.Tests.AssemblyWithEnum", "TypeLitePlus.Tests.AssemblyWithEnum\TypeLitePlus.Tests.AssemblyWithEnum.csproj", "{99818A20-DA2B-4ED4-A96D-E6FAE2DBED48}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TypeLitePlus", "TypeLitePlus\TypeLitePlus.csproj", "{CB386AF4-0417-4BE1-9724-B081582F895D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1B55F4A6-E57C-4E5C-9186-85FCF4BE0FF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B55F4A6-E57C-4E5C-9186-85FCF4BE0FF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B55F4A6-E57C-4E5C-9186-85FCF4BE0FF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B55F4A6-E57C-4E5C-9186-85FCF4BE0FF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BED54B17-3AE3-4F41-92BE-346AACB6E504}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BED54B17-3AE3-4F41-92BE-346AACB6E504}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BED54B17-3AE3-4F41-92BE-346AACB6E504}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BED54B17-3AE3-4F41-92BE-346AACB6E504}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F929AA37-6D8D-4D48-84D6-ED36F5929425}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F929AA37-6D8D-4D48-84D6-ED36F5929425}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F929AA37-6D8D-4D48-84D6-ED36F5929425}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F929AA37-6D8D-4D48-84D6-ED36F5929425}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99818A20-DA2B-4ED4-A96D-E6FAE2DBED48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99818A20-DA2B-4ED4-A96D-E6FAE2DBED48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99818A20-DA2B-4ED4-A96D-E6FAE2DBED48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99818A20-DA2B-4ED4-A96D-E6FAE2DBED48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CB386AF4-0417-4BE1-9724-B081582F895D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB386AF4-0417-4BE1-9724-B081582F895D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB386AF4-0417-4BE1-9724-B081582F895D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB386AF4-0417-4BE1-9724-B081582F895D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F929AA37-6D8D-4D48-84D6-ED36F5929425} = {33ACD6E6-0ADF-4372-932C-0CEE767B3287}
+		{99818A20-DA2B-4ED4-A96D-E6FAE2DBED48} = {33ACD6E6-0ADF-4372-932C-0CEE767B3287}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E275CC60-52C0-40CB-B007-DB9FDA3A34EB}
+	EndGlobalSection
+EndGlobal
