@@ -3,13 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28124.53
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{6F2E8A09-FDC7-48C9-AD7F-F101D03A6741}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EEE2AFA0-BFF3-433C-B72C-E9BE1598D017}"
 	ProjectSection(SolutionItems) = preProject
 		readme.md = readme.md
@@ -25,7 +18,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{33ACD6E6
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TypeLitePlus.Tests.AssemblyWithEnum", "TypeLitePlus.Tests.AssemblyWithEnum\TypeLitePlus.Tests.AssemblyWithEnum.csproj", "{99818A20-DA2B-4ED4-A96D-E6FAE2DBED48}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TypeLitePlus", "TypeLitePlus\TypeLitePlus.csproj", "{CB386AF4-0417-4BE1-9724-B081582F895D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypeLitePlus", "TypeLitePlus\TypeLitePlus.csproj", "{CB386AF4-0417-4BE1-9724-B081582F895D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

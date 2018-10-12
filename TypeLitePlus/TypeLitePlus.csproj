@@ -3,7 +3,15 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netcoreapp2.1</TargetFrameworks>
     <IncludeBuildOutput>false</IncludeBuildOutput>
+    <Version>2.0.0</Version>
+    <Authors>Lukas Kabrt, Robert McLaws, and contributors.</Authors>
+    <Description>Generates TypeScript classes or interfaces from .Net Standard 2.0 classes. This metapackage references everything you need to get going.</Description>
+    <Copyright>Copyright &amp;copy; 2018 Robert McLaws, and CloudNimble, Inc. Copyright &amp;copy 2013 Lukas Kabrt.</Copyright>
+    <PackageTags>TypeScript, TypeLite, d.ts</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageProjectUrl>http://type.litesolutions.net</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/CloudNimble/TypeLitePlus</RepositoryUrl>
+    <PackageLicenseUrl>https://choosealicense.com/licenses/mit/</PackageLicenseUrl>
   </PropertyGroup>
 
   <ItemGroup>
