@@ -121,21 +121,23 @@ namespace TypeLitePlus.Tests.NetCore.TsModels
 		[Fact]
 		public void WhenModuleIsSet_ClassIsAddedToModule() {
 			var module = new TsModule("Tests");
-			var target = new TsClass(typeof(Address));
+            var target = new TsClass(typeof(Address))
+            {
+                Module = module
+            };
 
-			target.Module = module;
-
-			Assert.Contains(target, module.Classes);
+            Assert.Contains(target, module.Classes);
 		}
 
 		[Fact]
 		public void WhenModuleIsSetToOtherModule_ClassIsRemovedFromOriginalModule() {
 			var originalModule = new TsModule("Tests.Original");
 			var module = new TsModule("Tests");
-			var target = new TsClass(typeof(Address));
-
-			target.Module = originalModule;
-			target.Module = module;
+            var target = new TsClass(typeof(Address))
+            {
+                Module = originalModule
+            };
+            target.Module = module;
 
 			Assert.DoesNotContain(target, originalModule.Classes);
 		}
@@ -161,9 +163,9 @@ namespace TypeLitePlus.Tests.NetCore.TsModels
 			var enumtype = property.PropertyType as TsEnum;
 			Assert.NotNull(enumtype);
 			Assert.NotEmpty(enumtype.Values);
-			Assert.True(enumtype.Values.Any(a => a.Name == "Book" && a.Value == ((int)ItemType.Book).ToString()));
-			Assert.True(enumtype.Values.Any(a => a.Name == "Music" && a.Value == ((int)ItemType.Music).ToString()));
-			Assert.True(enumtype.Values.Any(a => a.Name == "Clothing" && a.Value == ((int)ItemType.Clothing).ToString()));
+			Assert.Contains(enumtype.Values, a => a.Name == "Book" && a.Value == ((int)ItemType.Book).ToString());
+			Assert.Contains(enumtype.Values, a => a.Name == "Music" && a.Value == ((int)ItemType.Music).ToString());
+			Assert.Contains(enumtype.Values, a => a.Name == "Clothing" && a.Value == ((int)ItemType.Clothing).ToString());
 			Assert.Null(target.BaseType);
 		}
 

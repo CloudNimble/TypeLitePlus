@@ -1,6 +1,6 @@
 ﻿<#@ template debug="false" hostspecific="True" language="C#" #>
 <#@ assembly name="netstandard.dll" #>
-<#@ assembly name="$(TargetDir)TypeLitePlus.dll" #>
+<#@ assembly name="$(TargetDir)TypeLitePlus.Core.dll" #>
 <#@ assembly name="$(TargetDir)$(TargetFileName)" #>
 
 <#@ import namespace="TypeLitePlus" #> 

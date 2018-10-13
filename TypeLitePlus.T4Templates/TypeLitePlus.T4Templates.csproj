@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netcoreapp2.1</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
     <Authors>Lukas Kabrt, Robert McLaws, and contributors.</Authors>
     <Version>2.0.0</Version>
     <Description>Generates TypeScript classes or interfaces from .Net Standard 2.0 classes.</Description>
@@ -15,15 +15,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="ContentFiles\Scripts\Manager.ttinclude" />
-    <None Remove="ContentFiles\Scripts\TypeLite.tt" />
+    <None Remove="Scripts\Manager.ttinclude" />
+    <None Remove="Scripts\TypeLite.tt" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="ContentFiles\Scripts\Manager.ttinclude" />
-    <Content Include="ContentFiles\Scripts\TypeLite.tt">
+    <Content Include="Scripts\Manager.ttinclude">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\TypeLite.tt">
       <Generator>None</Generator>
       <LastGenOutput>TypeLite.d.ts</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 
