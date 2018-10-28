@@ -5,10 +5,12 @@ using TypeLitePlus.TsModels;
 
 namespace TypeLitePlus.Tests.NetCore.TsModels
 {
-    public class TsModuleTests {
+    public class TsModuleTests
+    {
 
         [Fact]
-        public void WhenInitialized_ClassesCollectionIsEmpty() {
+        public void WhenInitialized_ClassesCollectionIsEmpty()
+        {
             var target = new TsModule("Tests");
 
             Assert.NotNull(target.Classes);
@@ -16,7 +18,8 @@ namespace TypeLitePlus.Tests.NetCore.TsModels
         }
 
         [Fact]
-        public void WhenInitialized_NameIsSet() {
+        public void WhenInitialized_NameIsSet()
+        {
             var target = new TsModule("Tests");
 
             Assert.Equal("Tests", target.Name);

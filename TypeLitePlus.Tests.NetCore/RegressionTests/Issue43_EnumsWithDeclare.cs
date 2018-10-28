@@ -3,9 +3,11 @@ using Xunit;
 
 namespace TypeLitePlus.Tests.NetCore.RegressionTests
 {
-    public class Issue43_EnumsWithDeclare {
+    public class Issue43_EnumsWithDeclare
+    {
         [Fact]
-        public void WhenModuleIsGeneratedWithEnumsOnlyOption_ModuleDoesntHaveDeclareKeyword() {
+        public void WhenModuleIsGeneratedWithEnumsOnlyOption_ModuleDoesntHaveDeclareKeyword()
+        {
             var builder = new TsModelBuilder();
             builder.Add<MyTestClass>();
 
@@ -58,7 +60,8 @@ namespace TypeLitePlus.Tests.NetCore.RegressionTests
         }
 
         [Fact]
-        public void WhenModuleIsGeneratedWithPropertiesOnlyOption_ModuleHasDeclareKeyword() {
+        public void WhenModuleIsGeneratedWithPropertiesOnlyOption_ModuleHasDeclareKeyword()
+        {
             var builder = new TsModelBuilder();
             builder.Add<MyTestClass>();
 
@@ -70,7 +73,8 @@ namespace TypeLitePlus.Tests.NetCore.RegressionTests
         }
 
         [Fact]
-        public void WhenModuleIsGeneratedWithFieldsOnlyOption_ModuleHasDeclareKeyword() {
+        public void WhenModuleIsGeneratedWithFieldsOnlyOption_ModuleHasDeclareKeyword()
+        {
             var builder = new TsModelBuilder();
             builder.Add<MyTestClass>();
 
@@ -81,12 +85,14 @@ namespace TypeLitePlus.Tests.NetCore.RegressionTests
             Assert.Contains("declare", result);
         }
 
-        public class MyTestClass {
+        public class MyTestClass
+        {
             public int ID { get; set; }
             public MyTestEnum Enum { get; set; }
         }
 
-        public enum MyTestEnum {
+        public enum MyTestEnum
+        {
             One,
             Two,
             Three

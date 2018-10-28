@@ -258,11 +258,9 @@ namespace TypeLitePlus
             var classes = module.Classes.Where(c => !_typeConvertors.IsConvertorRegistered(c.Type) && !c.IsIgnored).OrderBy(c => GetTypeName(c)).ToList();
             var baseClasses = classes
                 .Where(c => c.BaseType != null)
-                .Select(c => c.BaseType.Type)
+                .Select(c => c.BaseType.Type.FullName)
                 .Distinct()
-                .Select(c => new TsClass(c))
-                .Where(c => !c.IsIgnored)
-                .OrderBy(c => GetTypeName(c))
+                .OrderBy(c => c)
                 .ToList();
             var enums = module.Enums.Where(e => !_typeConvertors.IsConvertorRegistered(e.Type) && !e.IsIgnored).OrderBy(e => GetTypeName(e)).ToList();
             if ((generatorOutput == TsGeneratorOutput.Enums && enums.Count == 0) ||
@@ -309,16 +307,16 @@ namespace TypeLitePlus
                 if (((generatorOutput & TsGeneratorOutput.Properties) == TsGeneratorOutput.Properties)
                     || (generatorOutput & TsGeneratorOutput.Fields) == TsGeneratorOutput.Fields)
                 {
-                    foreach (var baseClassModel in baseClasses)
+                    foreach (var baseClassModel in classes.Where(c => baseClasses.Contains(c.Type.FullName)))
                     {
-                        this.AppendClassDefinition(new TsClass(baseClassModel.Type), sb, generatorOutput);
+                        this.AppendClassDefinition(baseClassModel, sb, generatorOutput);
                     }
                 }
 
                 if (((generatorOutput & TsGeneratorOutput.Properties) == TsGeneratorOutput.Properties)
                     || (generatorOutput & TsGeneratorOutput.Fields) == TsGeneratorOutput.Fields)
                 {
-                    foreach (var classModel in classes.Where(c => !baseClasses.Contains(c)))
+                    foreach (var classModel in classes.Where(c => !baseClasses.Contains(c.Type.FullName)))
                     {
                         this.AppendClassDefinition(classModel, sb, generatorOutput);
                     }

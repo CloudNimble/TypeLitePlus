@@ -64,7 +64,7 @@ namespace TypeLitePlus.Tests.NetCore.RegressionTests
 
             var generator = new TsGenerator();
             // Reverse the order of the classes
-            generator.RegisterTypeFormatter((t, f) => ((TsClass) t).Name == "DifferentNamespaces_Class1" ? "classz" : "classa");
+            generator.RegisterTypeFormatter((t, f) => ((TsClass)t).Name == "DifferentNamespaces_Class1" ? "classz" : "classa");
             var model = builder.Build();
 
             var result = generator.Generate(model);

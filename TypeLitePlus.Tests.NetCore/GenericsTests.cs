@@ -4,9 +4,12 @@ using System.Linq;
 using System.Reflection;
 using Xunit;
 
-namespace TypeLitePlus.Tests.NetCore {
-    public class GenericsTests {
-        private string AddTypeAndGenerateTypeScript<TType>(Action<TsModel> modelAsserts = null) {
+namespace TypeLitePlus.Tests.NetCore
+{
+    public class GenericsTests
+    {
+        private string AddTypeAndGenerateTypeScript<TType>(Action<TsModel> modelAsserts = null)
+        {
             var builder = new TsModelBuilder();
             builder.Add<TType>();
             var model = builder.Build();
@@ -18,9 +21,11 @@ namespace TypeLitePlus.Tests.NetCore {
         }
 
         [Fact]
-        public void CanGenerateSpecificTypesForGenericProperties() {
+        public void CanGenerateSpecificTypesForGenericProperties()
+        {
             var typeScript = AddTypeAndGenerateTypeScript<GenerateSpecifyGenericTypesTestClass>(
-                model => {
+                model =>
+                {
                     var kvpClass = model.Classes.Single(c => !c.IsIgnored && c.Name == "KeyValuePair");
                     Assert.NotNull(kvpClass);
                     Assert.Equal("TKey", kvpClass.Properties.Single(p => p.Name == "Key").PropertyType.Type.Name);
@@ -34,33 +39,38 @@ namespace TypeLitePlus.Tests.NetCore {
         }
 
         [Fact]
-        public void CanGenerateSpecificTypesForCollectionsOfGenericClasses() {
+        public void CanGenerateSpecificTypesForCollectionsOfGenericClasses()
+        {
             var typeScript = AddTypeAndGenerateTypeScript<GenerateSpecificCollectionsOfGenericTypesTestClass>();
             Assert.Contains("ListOfIntToString: System.Collections.Generic.KeyValuePair<number, string>[];", typeScript);
         }
 
 
         [Fact]
-        public void CanGenerateNestedGenericPropertiesForSystemTypes() {
+        public void CanGenerateNestedGenericPropertiesForSystemTypes()
+        {
             var typeScript = AddTypeAndGenerateTypeScript<HandleNestedGenericsSystemTypesTestClass>();
             Assert.Contains("NestedStringList: string[][]", typeScript);
         }
 
 
         [Fact]
-        public void CanGenerateNestedGenericPropertiesForCustomTypes() {
+        public void CanGenerateNestedGenericPropertiesForCustomTypes()
+        {
             var typeScript = AddTypeAndGenerateTypeScript<HandleNestedGenericsCollectionCustomTypesTestClass>();
             Assert.Contains("NestedCustomClassList: TypeLitePlus.Tests.NetCore.GenericsTests.GenerateSpecifyGenericTypesTestClass[][][][];", typeScript);
         }
 
         [Fact]
-        public void KeyValuePairWithSpecificArguments() {
+        public void KeyValuePairWithSpecificArguments()
+        {
             var typeScript = AddTypeAndGenerateTypeScript<ClassWithSpecificKeyValuePairArguments>();
             Assert.Contains("KeyValuePair: System.Collections.Generic.KeyValuePair<number, string[]>;", typeScript);
         }
 
         [Fact]
-        public void CanHandleGenericArgsInBaseClass() {
+        public void CanHandleGenericArgsInBaseClass()
+        {
             var typeScript = AddTypeAndGenerateTypeScript<DerivedGenericClass>();
             Assert.Contains("SomeGenericProperty: TType;", typeScript);
             Assert.Contains("SomeGenericArrayProperty: TType[];", typeScript);
@@ -68,19 +78,22 @@ namespace TypeLitePlus.Tests.NetCore {
         }
 
         [Fact]
-        public void GenericParameterTypeIsFullyQualified() {
+        public void GenericParameterTypeIsFullyQualified()
+        {
             var typeScript = AddTypeAndGenerateTypeScript<DerivedGenericClassWithArgInDifferentNamespace>();
             Assert.Contains("interface DerivedGenericClassWithArgInDifferentNamespace extends TypeLitePlus.Tests.NetCore.GenericsTests.BaseGeneric<DummyNamespace.Test>", typeScript);
         }
 
         [Fact]
-        public void GeneratesComplicatedNestedGenericProperties() {
+        public void GeneratesComplicatedNestedGenericProperties()
+        {
             var typeScript = AddTypeAndGenerateTypeScript<ClassWithComplexNestedGenericProperty>();
             Assert.Contains("GenericsHell: System.Tuple<System.Collections.Generic.KeyValuePair<number, string>, TypeLitePlus.Tests.NetCore.GenericsTests.BaseGeneric<string>, number, System.Collections.Generic.KeyValuePair<number, DummyNamespace.Test>>;", typeScript);
         }
 
         [Fact]
-        public void DeepGenericClassInheritenceTreeIsGeneratedCorrectly() {
+        public void DeepGenericClassInheritenceTreeIsGeneratedCorrectly()
+        {
             var typeScript = AddTypeAndGenerateTypeScript<DerivedGenericTwoLevelsDeep>();
             Assert.Contains("interface DerivedGenericTwoLevelsDeep extends TypeLitePlus.Tests.NetCore.GenericsTests.DerivedGenericWithNewTypeArgument<string, DummyNamespace.Test> {", typeScript);
             Assert.Contains("interface DerivedGenericWithNewTypeArgument<TNewType, TType> extends TypeLitePlus.Tests.NetCore.GenericsTests.BaseGeneric<TType> {", typeScript);
@@ -88,7 +101,8 @@ namespace TypeLitePlus.Tests.NetCore {
         }
 
         [Fact]
-        public void DeepGenericInterfaceInheritenceTreeIsGeneratedCorrectly() {
+        public void DeepGenericInterfaceInheritenceTreeIsGeneratedCorrectly()
+        {
             var typeScript = AddTypeAndGenerateTypeScript<IDerivedGenericTwoLevelsDeep>();
             Assert.Contains("interface IDerivedGenericTwoLevelsDeep extends TypeLitePlus.Tests.NetCore.GenericsTests.IDerivedGenericWithNewTypeArgument<string, DummyNamespace.Test> {", typeScript);
             Assert.Contains("interface IDerivedGenericWithNewTypeArgument<TNewType, TType> extends TypeLitePlus.Tests.NetCore.GenericsTests.IBaseGeneric<TType> {", typeScript);
@@ -96,7 +110,8 @@ namespace TypeLitePlus.Tests.NetCore {
         }
 
         [Fact]
-        public void DerivedClassWithNewNameForGenericParameter() {
+        public void DerivedClassWithNewNameForGenericParameter()
+        {
             var typescript = AddTypeAndGenerateTypeScript<DerivedClassWithNameGenericParameterName<int, string>>();
 
             Assert.Contains("DerivedClassWithNameGenericParameterName<TNewParam, TSomethingNew> extends TypeLitePlus.Tests.NetCore.GenericsTests.BaseGeneric<TSomethingNew>", typescript);
@@ -104,66 +119,81 @@ namespace TypeLitePlus.Tests.NetCore {
         }
 
         #region Test classes
-        private class HandleNestedGenericsSystemTypesTestClass {
+        private class HandleNestedGenericsSystemTypesTestClass
+        {
             public List<List<string>> NestedStringList { get; set; }
         }
 
-        private class HandleNestedGenericsCollectionCustomTypesTestClass {
+        private class HandleNestedGenericsCollectionCustomTypesTestClass
+        {
             public List<List<List<List<GenerateSpecifyGenericTypesTestClass>>>> NestedCustomClassList { get; set; }
         }
 
-        private class GenerateSpecificCollectionsOfGenericTypesTestClass {
+        private class GenerateSpecificCollectionsOfGenericTypesTestClass
+        {
             public List<KeyValuePair<int, string>> ListOfIntToString { get; set; }
         }
 
-        private class GenerateSpecifyGenericTypesTestClass {
+        private class GenerateSpecifyGenericTypesTestClass
+        {
             public KeyValuePair<string, int> StringToInt { get; set; }
         }
 
-        private class ClassWithSpecificKeyValuePairArguments {
+        private class ClassWithSpecificKeyValuePairArguments
+        {
             public KeyValuePair<int, List<string>> KeyValuePair { get; set; }
         }
 
-        internal class BaseGeneric<TType> {
+        internal class BaseGeneric<TType>
+        {
             public TType SomeGenericProperty { get; set; }
             public TType[] SomeGenericArrayProperty { get; set; }
         }
 
-        private class DerivedGenericClass : BaseGeneric<string> {
+        private class DerivedGenericClass : BaseGeneric<string>
+        {
         }
 
-        private class DerivedGenericWithNewTypeArgument<TNewType, TType> : BaseGeneric<TType> {
+        private class DerivedGenericWithNewTypeArgument<TNewType, TType> : BaseGeneric<TType>
+        {
             public TNewType NewGenericProperty { get; set; }
         }
 
-        private class DerivedGenericTwoLevelsDeep : DerivedGenericWithNewTypeArgument<string, DummyNamespace.Test> {
+        private class DerivedGenericTwoLevelsDeep : DerivedGenericWithNewTypeArgument<string, DummyNamespace.Test>
+        {
             public string NonGenericProperty { get; set; }
         }
 
         [TsInterface]
-        internal interface IBaseGeneric<TType> {
+        internal interface IBaseGeneric<TType>
+        {
             TType SomeGenericProperty { get; set; }
             TType[] SomeGenericArrayProperty { get; set; }
         }
 
         [TsInterface]
-        private interface IDerivedGenericWithNewTypeArgument<TNewType, TType> : IBaseGeneric<TType> {
+        private interface IDerivedGenericWithNewTypeArgument<TNewType, TType> : IBaseGeneric<TType>
+        {
             TNewType NewGenericProperty { get; set; }
         }
 
         [TsInterface]
-        private interface IDerivedGenericTwoLevelsDeep : IDerivedGenericWithNewTypeArgument<string, DummyNamespace.Test> {
+        private interface IDerivedGenericTwoLevelsDeep : IDerivedGenericWithNewTypeArgument<string, DummyNamespace.Test>
+        {
 
         }
 
-        private class DerivedGenericClassWithArgInDifferentNamespace : BaseGeneric<DummyNamespace.Test> {
+        private class DerivedGenericClassWithArgInDifferentNamespace : BaseGeneric<DummyNamespace.Test>
+        {
         }
 
-        private class ClassWithComplexNestedGenericProperty {
+        private class ClassWithComplexNestedGenericProperty
+        {
             public Tuple<KeyValuePair<int, string>, BaseGeneric<string>, decimal, KeyValuePair<int, DummyNamespace.Test>> GenericsHell { get; set; }
         }
 
-        private class DerivedClassWithNameGenericParameterName<TNewParam, TSomethingNew> : BaseGeneric<TSomethingNew> {
+        private class DerivedClassWithNameGenericParameterName<TNewParam, TSomethingNew> : BaseGeneric<TSomethingNew>
+        {
             public TNewParam SomeProperty { get; set; }
         }
 
@@ -171,7 +201,9 @@ namespace TypeLitePlus.Tests.NetCore {
     }
 }
 
-namespace DummyNamespace {
-    public class Test {
+namespace DummyNamespace
+{
+    public class Test
+    {
     }
 }

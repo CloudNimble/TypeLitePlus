@@ -2,9 +2,11 @@
 
 namespace TypeLitePlus.Tests.NetCore.RegressionTests
 {
-    public class Issue44_EnumsWithExport {
+    public class Issue44_EnumsWithExport
+    {
         [Fact]
-        public void WhenEnumIsGenerated_ItHasExportKeyword() {
+        public void WhenEnumIsGenerated_ItHasExportKeyword()
+        {
             var builder = new TsModelBuilder();
             builder.Add<MyTestClass>();
 
@@ -15,12 +17,14 @@ namespace TypeLitePlus.Tests.NetCore.RegressionTests
             Assert.Contains("export", result);
         }
 
-        public class MyTestClass {
+        public class MyTestClass
+        {
             public int ID { get; set; }
             public MyTestEnum Enum { get; set; }
         }
 
-        public enum MyTestEnum {
+        public enum MyTestEnum
+        {
             One,
             Two,
             Three

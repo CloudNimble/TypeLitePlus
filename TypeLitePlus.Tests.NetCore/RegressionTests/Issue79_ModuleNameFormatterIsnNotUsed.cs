@@ -4,9 +4,11 @@ using Xunit;
 
 namespace TypeLitePlus.Tests.NetCore.RegressionTests
 {
-    public class Issue79_ModuleNameFormatterIsnNotUsed {
+    public class Issue79_ModuleNameFormatterIsnNotUsed
+    {
         [Fact]
-        public void WhenScriptGeneratorGenerateIsCalledModuleNameFormatterIsUsed() {
+        public void WhenScriptGeneratorGenerateIsCalledModuleNameFormatterIsUsed()
+        {
 
             var ts = TypeScript.Definitions();
             ts.WithModuleNameFormatter(m => "XXX");

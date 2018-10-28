@@ -2,23 +2,29 @@
 
 namespace TypeLitePlus.Tests.NetCore
 {
-    public class ScriptBuilderTests {
+    public class ScriptBuilderTests
+    {
         ScriptBuilder _sb;
-        public ScriptBuilderTests() {
+        public ScriptBuilderTests()
+        {
             _sb = new ScriptBuilder("\t");
         }
 
         [Fact]
-        public void WhenIncreaseIndentation_IndentationLevelIsIncreased() {
+        public void WhenIncreaseIndentation_IndentationLevelIsIncreased()
+        {
             _sb.IncreaseIndentation();
 
             Assert.Equal(1, _sb.IndentationLevels);
         }
 
         [Fact]
-        public void WhenIndentationLevelIsDisposed_IndentationLevelIsDecreased() {
-            using (_sb.IncreaseIndentation()) {
-                using (_sb.IncreaseIndentation()) {
+        public void WhenIndentationLevelIsDisposed_IndentationLevelIsDecreased()
+        {
+            using (_sb.IncreaseIndentation())
+            {
+                using (_sb.IncreaseIndentation())
+                {
                     ;
                 }
 
@@ -27,7 +33,8 @@ namespace TypeLitePlus.Tests.NetCore
         }
 
         [Fact]
-        public void WhenAppendIndentation_IndentationCharactersAccordingToIndentationLevelsAreAppended() {
+        public void WhenAppendIndentation_IndentationCharactersAccordingToIndentationLevelsAreAppended()
+        {
             _sb.IncreaseIndentation();
             _sb.IncreaseIndentation();
 
@@ -39,7 +46,8 @@ namespace TypeLitePlus.Tests.NetCore
         }
 
         [Fact]
-        public void WhenAppendString_StrignIsAppended() {
+        public void WhenAppendString_StrignIsAppended()
+        {
             _sb.Append("test");
 
             var script = _sb.ToString();
@@ -48,7 +56,8 @@ namespace TypeLitePlus.Tests.NetCore
         }
 
         [Fact]
-        public void WhenAppendFormatString_StrignIsAppended() {
+        public void WhenAppendFormatString_StrignIsAppended()
+        {
             _sb.AppendFormat("test {0}", 1);
 
             var script = _sb.ToString();
@@ -57,7 +66,8 @@ namespace TypeLitePlus.Tests.NetCore
         }
 
         [Fact]
-        public void WhenAppendIndentedString_IndentedStringIsAppended() {
+        public void WhenAppendIndentedString_IndentedStringIsAppended()
+        {
             _sb.IncreaseIndentation();
             _sb.AppendIndented("test");
 
@@ -67,7 +77,8 @@ namespace TypeLitePlus.Tests.NetCore
         }
 
         [Fact]
-        public void WhenAppendFormatIndented_IndentedStringIsAppended() {
+        public void WhenAppendFormatIndented_IndentedStringIsAppended()
+        {
             _sb.IncreaseIndentation();
             _sb.AppendFormatIndented("test {0}", 1);
 

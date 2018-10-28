@@ -25,10 +25,10 @@ namespace TypeLitePlus.Tests.NetCore.RegressionTests
         }
 
         [TsClass]
-        public class GenericPropertiesBug 
-        { 
-            public KeyValuePair<string, string> Test1 { get; set; } 
-            public KeyValuePair<string, int> Test2 { get; set; } 
+        public class GenericPropertiesBug
+        {
+            public KeyValuePair<string, string> Test1 { get; set; }
+            public KeyValuePair<string, int> Test2 { get; set; }
         }
     }
 }

@@ -2,10 +2,12 @@
 
 namespace TypeLitePlus.Tests.NetCore.RegressionTests
 {
-    public class Issue52_EnumsWithoutClass {
+    public class Issue52_EnumsWithoutClass
+    {
 
         [Fact]
-        public void WhenAssemblyContainsEnumWithoutClass_EnumIsGeneratedInTheOutput() {
+        public void WhenAssemblyContainsEnumWithoutClass_EnumIsGeneratedInTheOutput()
+        {
             var builder = new TsModelBuilder();
             builder.Add(typeof(TypeLitePlus.Tests.AssemblyWithEnum.TestEnum).Assembly);
 
@@ -16,7 +18,8 @@ namespace TypeLitePlus.Tests.NetCore.RegressionTests
             Assert.Contains("TestEnum", result);
         }
 
-        enum MyTestEnum {
+        enum MyTestEnum
+        {
             One,
             Two,
             Three

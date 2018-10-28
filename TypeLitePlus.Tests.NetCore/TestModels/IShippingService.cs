@@ -1,6 +1,7 @@
 ﻿namespace TypeLitePlus.Tests.NetCore.TestModels
 {
-    public interface IShippingService {
+    public interface IShippingService
+    {
         double Price { get; set; }
     }
 }

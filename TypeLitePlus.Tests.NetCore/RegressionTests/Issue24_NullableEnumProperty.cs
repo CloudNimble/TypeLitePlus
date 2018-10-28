@@ -2,9 +2,11 @@
 
 namespace TypeLitePlus.Tests.NetCore.RegressionTests
 {
-    public class Issue24_NullableEnumProperty {
+    public class Issue24_NullableEnumProperty
+    {
         [Fact]
-        public void WhenClassContainsNullableEnumProperty_ExceptionIsNotThrown() {
+        public void WhenClassContainsNullableEnumProperty_ExceptionIsNotThrown()
+        {
             var builder = new TsModelBuilder();
             builder.Add<Issue24Example>();
 
@@ -16,11 +18,13 @@ namespace TypeLitePlus.Tests.NetCore.RegressionTests
         }
     }
 
-    public class Issue24Example {
+    public class Issue24Example
+    {
         public Issue24Enum? EnumProperty { get; set; }
     }
 
-    public enum Issue24Enum {
+    public enum Issue24Enum
+    {
         A = 1,
         B = 2
     }

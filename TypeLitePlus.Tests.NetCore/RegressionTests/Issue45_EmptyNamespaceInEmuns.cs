@@ -2,9 +2,11 @@
 
 namespace TypeLitePlus.Tests.NetCore.RegressionTests
 {
-    public class Issue45_EmptyNamespaceInEmuns {
+    public class Issue45_EmptyNamespaceInEmuns
+    {
         [Fact]
-        public void WhenModuleDoesntContainsAnyEnums_ItIsntGeneratedWithEnumsOption() {
+        public void WhenModuleDoesntContainsAnyEnums_ItIsntGeneratedWithEnumsOption()
+        {
             var builder = new TsModelBuilder();
             builder.Add<MyTestClass>();
 
@@ -15,14 +17,16 @@ namespace TypeLitePlus.Tests.NetCore.RegressionTests
             Assert.DoesNotContain("MyTestModule", result);
         }
 
-        [TsClass(Module="MyTestModule")]
-        public class MyTestClass {
+        [TsClass(Module = "MyTestModule")]
+        public class MyTestClass
+        {
             public int ID { get; set; }
             public MyTestEnum Enum { get; set; }
         }
 
-        [TsEnum(Module="EnumsModule")]
-        public enum MyTestEnum {
+        [TsEnum(Module = "EnumsModule")]
+        public enum MyTestEnum
+        {
             One,
             Two,
             Three

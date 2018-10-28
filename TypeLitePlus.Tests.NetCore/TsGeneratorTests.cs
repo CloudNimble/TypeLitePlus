@@ -4,15 +4,18 @@ using System.Linq;
 using Xunit;
 using TypeLitePlus.Tests.NetCore.TestModels;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace TypeLitePlus.Tests.NetCore
 {
-    public class TsGeneratorTests {
+    public class TsGeneratorTests
+    {
 
         #region Generate tests
 
         [Fact]
-        public void WhenModelContainsReference_ReferenceIsAddedToOutput() {
+        public void WhenModelContainsReference_ReferenceIsAddedToOutput()
+        {
             var model = new TsModel();
             model.References.Add("knockout.d.ts");
 
@@ -23,7 +26,23 @@ namespace TypeLitePlus.Tests.NetCore
         }
 
         [Fact]
-        public void WhenClassIsIgnored_InterfaceForClassIsntGenerated() {
+        public void WhenClassHasBase_MultipleBasesArentGenerated()
+        {
+            var builder = new TsModelBuilder();
+            builder.Add<Employee>();
+            builder.Add<User>();
+            var model = builder.Build();
+
+            var target = new TsGenerator();
+            var script = target.Generate(model);
+
+            var count = Regex.Matches(script, Regex.Escape("interface Person")).Count;
+            Assert.True(count == 1, script);
+        }
+
+        [Fact]
+        public void WhenClassIsIgnored_InterfaceForClassIsntGenerated()
+        {
             var builder = new TsModelBuilder();
             builder.Add<Address>();
             var model = builder.Build();
@@ -63,7 +82,8 @@ namespace TypeLitePlus.Tests.NetCore
 
 
         [Fact]
-        public void WhenPropertyIsIgnored_PropertyIsExcludedFromInterface() {
+        public void WhenPropertyIsIgnored_PropertyIsExcludedFromInterface()
+        {
             var builder = new TsModelBuilder();
             builder.Add<Address>();
             var model = builder.Build();
@@ -76,7 +96,8 @@ namespace TypeLitePlus.Tests.NetCore
         }
 
         [Fact]
-        public void WhenFieldIsIgnored_FieldIsExcludedFromInterface() {
+        public void WhenFieldIsIgnored_FieldIsExcludedFromInterface()
+        {
             var builder = new TsModelBuilder();
             builder.Add<Address>();
             var model = builder.Build();
@@ -89,7 +110,8 @@ namespace TypeLitePlus.Tests.NetCore
         }
 
         [Fact]
-        public void WhenClassIsReferenced_FullyQualifiedNameIsUsed() {
+        public void WhenClassIsReferenced_FullyQualifiedNameIsUsed()
+        {
             var builder = new TsModelBuilder();
             builder.Add<Person>();
             var model = builder.Build();
@@ -101,7 +123,8 @@ namespace TypeLitePlus.Tests.NetCore
         }
 
         [Fact]
-        public void WhenClassIsReferencedAndOutputIsSetToEnums_ClassIsntInOutput() {
+        public void WhenClassIsReferencedAndOutputIsSetToEnums_ClassIsntInOutput()
+        {
             var builder = new TsModelBuilder();
             builder.Add<Item>();
             var model = builder.Build();
@@ -112,7 +135,8 @@ namespace TypeLitePlus.Tests.NetCore
         }
 
         [Fact]
-        public void WhenClassIsReferencedAndOutputIsSetToEnums_ConstantIsntInOutput() {
+        public void WhenClassIsReferencedAndOutputIsSetToEnums_ConstantIsntInOutput()
+        {
             var builder = new TsModelBuilder();
             builder.Add<Item>();
             var model = builder.Build();
@@ -123,7 +147,8 @@ namespace TypeLitePlus.Tests.NetCore
         }
 
         [Fact]
-        public void WhenEnumIsReferencedAndOutputIsSetToProperties_EnumIsntInOutput() {
+        public void WhenEnumIsReferencedAndOutputIsSetToProperties_EnumIsntInOutput()
+        {
             var builder = new TsModelBuilder();
             builder.Add<Item>();
             var model = builder.Build();
@@ -134,7 +159,8 @@ namespace TypeLitePlus.Tests.NetCore
         }
 
         [Fact]
-        public void WhenEnumIsReferencedAndOutputIsSetToProperties_ConstantIsntInOutput() {
+        public void WhenEnumIsReferencedAndOutputIsSetToProperties_ConstantIsntInOutput()
+        {
             var builder = new TsModelBuilder();
             builder.Add<Item>();
             var model = builder.Build();
@@ -145,7 +171,8 @@ namespace TypeLitePlus.Tests.NetCore
         }
 
         [Fact]
-        public void WhenEnumIsReferencedAndOutputIsSetToFields_EnumIsntInOutput() {
+        public void WhenEnumIsReferencedAndOutputIsSetToFields_EnumIsntInOutput()
+        {
             var builder = new TsModelBuilder();
             builder.Add<Item>();
             var model = builder.Build();
@@ -156,7 +183,8 @@ namespace TypeLitePlus.Tests.NetCore
         }
 
         [Fact]
-        public void WhenEnumIsReferencedAndOutputIsSetToFields_ConstantIsntInOutput() {
+        public void WhenEnumIsReferencedAndOutputIsSetToFields_ConstantIsntInOutput()
+        {
             var builder = new TsModelBuilder();
             builder.Add<Item>();
             var model = builder.Build();
@@ -167,7 +195,8 @@ namespace TypeLitePlus.Tests.NetCore
         }
 
         [Fact]
-        public void WhenClassIsReferencedAndOutputIsSetToConstants_ClassIsntInOutput() {
+        public void WhenClassIsReferencedAndOutputIsSetToConstants_ClassIsntInOutput()
+        {
             var builder = new TsModelBuilder();
             builder.Add<Item>();
             var model = builder.Build();
@@ -178,7 +207,8 @@ namespace TypeLitePlus.Tests.NetCore
         }
 
         [Fact]
-        public void WhenClassIsReferencedAndOutputIsSetToConstants_EnumIsntInOutput() {
+        public void WhenClassIsReferencedAndOutputIsSetToConstants_EnumIsntInOutput()
+        {
             var builder = new TsModelBuilder();
             builder.Add<Item>();
             var model = builder.Build();
@@ -189,7 +219,8 @@ namespace TypeLitePlus.Tests.NetCore
         }
 
         [Fact]
-        public void WhenClassWithEnumReferenced_FullyQualifiedNameIsUsed() {
+        public void WhenClassWithEnumReferenced_FullyQualifiedNameIsUsed()
+        {
             var builder = new TsModelBuilder();
             builder.Add<Item>();
             var model = builder.Build();
@@ -200,7 +231,8 @@ namespace TypeLitePlus.Tests.NetCore
         }
 
         [Fact]
-        public void WhenConvertorIsRegistered_ConvertedTypeNameIsUsed() {
+        public void WhenConvertorIsRegistered_ConvertedTypeNameIsUsed()
+        {
             var builder = new TsModelBuilder();
             builder.Add<Address>();
             var model = builder.Build();
@@ -213,7 +245,8 @@ namespace TypeLitePlus.Tests.NetCore
         }
 
         [Fact]
-        public void WhenConvertorIsRegistered_ConvertedTypeNameIsUsedForFields() {
+        public void WhenConvertorIsRegistered_ConvertedTypeNameIsUsedForFields()
+        {
             var builder = new TsModelBuilder();
             builder.Add<Address>();
             var model = builder.Build();
@@ -226,7 +259,8 @@ namespace TypeLitePlus.Tests.NetCore
         }
 
         [Fact]
-        public void WhenConvertorIsRegisteredForGuid_ConvertedTypeNameIsUsed() {
+        public void WhenConvertorIsRegisteredForGuid_ConvertedTypeNameIsUsed()
+        {
             var builder = new TsModelBuilder();
             builder.Add<Address>();
             var model = builder.Build();
@@ -239,7 +273,8 @@ namespace TypeLitePlus.Tests.NetCore
         }
 
         [Fact]
-        public void WhenConvertorIsRegisteredForGuidCollection_ConvertedTypeNameIsUsed() {
+        public void WhenConvertorIsRegisteredForGuidCollection_ConvertedTypeNameIsUsed()
+        {
             var builder = new TsModelBuilder();
             builder.Add<Address>();
             var model = builder.Build();
@@ -252,7 +287,8 @@ namespace TypeLitePlus.Tests.NetCore
         }
 
         [Fact]
-        public void WhenConvertorIsRegisteredForGuid_NoStringInterfaceIsDefined() {
+        public void WhenConvertorIsRegisteredForGuid_NoStringInterfaceIsDefined()
+        {
             var builder = new TsModelBuilder();
             builder.Add<Address>();
             var model = builder.Build();
@@ -265,7 +301,8 @@ namespace TypeLitePlus.Tests.NetCore
         }
 
         [Fact]
-        public void PropertyIsMarkedOptional_OptionalPropertyIsGenerated() {
+        public void PropertyIsMarkedOptional_OptionalPropertyIsGenerated()
+        {
             var builder = new TsModelBuilder();
             builder.Add<Address>();
             var model = builder.Build();
@@ -277,7 +314,8 @@ namespace TypeLitePlus.Tests.NetCore
         }
 
         [Fact]
-        public void WhenInterfaceIsAdded_InterfaceIsInOutput() {
+        public void WhenInterfaceIsAdded_InterfaceIsInOutput()
+        {
             var builder = new TsModelBuilder();
             builder.Add<IShippingService>();
             var model = builder.Build();
@@ -289,21 +327,26 @@ namespace TypeLitePlus.Tests.NetCore
         }
 
         [Fact]
-        public void WhenGenerate_OutputIsFormated() {
+        public void WhenGenerate_OutputIsFormated()
+        {
             var builder = new TsModelBuilder();
             builder.Add<Address>();
             var model = builder.Build();
-            
+
             var target = new TsGenerator();
             var script = target.Generate(model);
 
-            using (var reader = new StringReader(script)) {
+            using (var reader = new StringReader(script))
+            {
                 var line = string.Empty;
-                while((line = reader.ReadLine()) != null) {
-                    if (line.Contains("interface Address {")) {
+                while ((line = reader.ReadLine()) != null)
+                {
+                    if (line.Contains("interface Address {"))
+                    {
                         Assert.StartsWith("\t", line);
                     }
-                    if (line.Contains("ID: Guid")) {
+                    if (line.Contains("ID: Guid"))
+                    {
                         Assert.StartsWith("\t\t", line);
                     }
                 }

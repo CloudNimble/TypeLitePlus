@@ -4,10 +4,12 @@ using Xunit;
 
 namespace TypeLitePlus.Tests.NetCore.RegressionTests
 {
-    public class Issue88_TypeformatterAppliedToOpenGenericsParameters {
+    public class Issue88_TypeformatterAppliedToOpenGenericsParameters
+    {
 
-        [Fact(Skip="Not fixed")]
-        public void WhenTypeFormaterIsUsed_ItIsntAppliedToOpenGenericsParameters() {
+        [Fact(Skip = "Not fixed")]
+        public void WhenTypeFormaterIsUsed_ItIsntAppliedToOpenGenericsParameters()
+        {
             var ts = TypeScript.Definitions()
                 .For<UserPreference>()
                 .WithTypeFormatter(((type, F) => "I" + ((TypeLitePlus.TsModels.TsClass)type).Name))
@@ -20,7 +22,8 @@ namespace TypeLitePlus.Tests.NetCore.RegressionTests
         }
 
 
-        public class UserPreference {
+        public class UserPreference
+        {
             public Dictionary<string, string> Preferences { get; set; }
         }
     }

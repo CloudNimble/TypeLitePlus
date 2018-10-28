@@ -3,9 +3,11 @@ using Xunit;
 
 namespace TypeLitePlus.Tests.NetCore.RegressionTests
 {
-    public class Issue65_GenericReferencingContainingType {
+    public class Issue65_GenericReferencingContainingType
+    {
         [Fact]
-        public void WhenClassReferencesItself_ClassIsGenerated() {
+        public void WhenClassReferencesItself_ClassIsGenerated()
+        {
             var builder = new TsModelBuilder();
             builder.Add<GenericWithSelfReference>();
 
@@ -18,7 +20,8 @@ namespace TypeLitePlus.Tests.NetCore.RegressionTests
 
     }
 
-    public class GenericWithSelfReference {
+    public class GenericWithSelfReference
+    {
         public List<GenericWithSelfReference> Children { get; set; }
     }
 }

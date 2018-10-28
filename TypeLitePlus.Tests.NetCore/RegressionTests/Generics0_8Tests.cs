@@ -4,34 +4,38 @@ using Xunit;
 
 namespace TypeLitePlus.Tests.NetCore.RegressionTests
 {
-    public class Generics0_8Tests {
-		[Fact]
-		public void WhenClassHasGenericArguments_ValidTypescriptNameIsGenerated() {
-			var builder = new TsModelBuilder();
-			builder.Add<ClassWithGenericArguments<Address>>();
+    public class Generics0_8Tests
+    {
+        [Fact]
+        public void WhenClassHasGenericArguments_ValidTypescriptNameIsGenerated()
+        {
+            var builder = new TsModelBuilder();
+            builder.Add<ClassWithGenericArguments<Address>>();
 
-			var generator = new TsGenerator();
-			var model = builder.Build();
-			var result = generator.Generate(model);
-			Console.WriteLine(result);
+            var generator = new TsGenerator();
+            var model = builder.Build();
+            var result = generator.Generate(model);
+            Console.WriteLine(result);
 
-			Assert.Contains("interface ClassWithGenericArguments<T> {", result);
-		}
+            Assert.Contains("interface ClassWithGenericArguments<T> {", result);
+        }
 
-		[Fact]
-		public void WhenClassHasGenericProperty_PropertyTypeIsResolvedToTypeOfGenericArgument() {
-			var builder = new TsModelBuilder();
-			builder.Add<ClassWithGenericArguments<Address>>();
+        [Fact]
+        public void WhenClassHasGenericProperty_PropertyTypeIsResolvedToTypeOfGenericArgument()
+        {
+            var builder = new TsModelBuilder();
+            builder.Add<ClassWithGenericArguments<Address>>();
 
-			var generator = new TsGenerator();
-			var model = builder.Build();
-			var result = generator.Generate(model);
+            var generator = new TsGenerator();
+            var model = builder.Build();
+            var result = generator.Generate(model);
 
-			Assert.Contains("Property: T", result);
-		}
-	}
+            Assert.Contains("Property: T", result);
+        }
+    }
 
-	public class ClassWithGenericArguments<T> {
-		public T Property { get; set; }
-	}
+    public class ClassWithGenericArguments<T>
+    {
+        public T Property { get; set; }
+    }
 }

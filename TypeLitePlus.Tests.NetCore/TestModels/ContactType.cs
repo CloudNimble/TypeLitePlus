@@ -1,7 +1,8 @@
 ﻿namespace TypeLitePlus.Tests.NetCore.TestModels
 {
-    public enum ContactType {
-		Personal,
-		Business
-	}
+    public enum ContactType
+    {
+        Personal,
+        Business
+    }
 }

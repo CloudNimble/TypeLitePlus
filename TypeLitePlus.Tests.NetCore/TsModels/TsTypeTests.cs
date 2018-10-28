@@ -6,109 +6,124 @@ using Xunit;
 
 namespace TypeLitePlus.Tests.NetCore.TsModels
 {
-    public class TsTypeTests {
-		[Fact]
-		public void WhenInitilized_ClrTypeIsSet() {
-			var type = typeof(string);
+    public class TsTypeTests
+    {
+        [Fact]
+        public void WhenInitilized_ClrTypeIsSet()
+        {
+            var type = typeof(string);
 
-			var target = new TsType(type);
+            var target = new TsType(type);
 
-			Assert.Equal(type, target.Type);
-		}
+            Assert.Equal(type, target.Type);
+        }
 
-		#region GetTypeFamily tests
+        #region GetTypeFamily tests
 
-		[Fact]
-		public void WhenGetTypeFamilyForInt_SystemIsReturned() {
-			var family = TsType.GetTypeFamily(typeof(int));
+        [Fact]
+        public void WhenGetTypeFamilyForInt_SystemIsReturned()
+        {
+            var family = TsType.GetTypeFamily(typeof(int));
 
-			Assert.Equal(TsTypeFamily.System, family);
-		}
+            Assert.Equal(TsTypeFamily.System, family);
+        }
 
-		[Fact]
-		public void WhenGetTypeFamilyForString_SystemIsReturned() {
-			var family = TsType.GetTypeFamily(typeof(string));
+        [Fact]
+        public void WhenGetTypeFamilyForString_SystemIsReturned()
+        {
+            var family = TsType.GetTypeFamily(typeof(string));
 
-			Assert.Equal(TsTypeFamily.System, family);
-		}
+            Assert.Equal(TsTypeFamily.System, family);
+        }
 
-		[Fact]
-		public void WhenGetTypeFamilyForDouble_SystemIsReturned() {
-			var family = TsType.GetTypeFamily(typeof(double));
+        [Fact]
+        public void WhenGetTypeFamilyForDouble_SystemIsReturned()
+        {
+            var family = TsType.GetTypeFamily(typeof(double));
 
-			Assert.Equal(TsTypeFamily.System, family);
-		}
+            Assert.Equal(TsTypeFamily.System, family);
+        }
 
-		[Fact]
-		public void WhenGetTypeFamilyForBool_SystemIsReturned() {
-			var family = TsType.GetTypeFamily(typeof(bool));
+        [Fact]
+        public void WhenGetTypeFamilyForBool_SystemIsReturned()
+        {
+            var family = TsType.GetTypeFamily(typeof(bool));
 
-			Assert.Equal(TsTypeFamily.System, family);
-		}
+            Assert.Equal(TsTypeFamily.System, family);
+        }
 
-		[Fact]
-		public void WhenGetTypeFamilyForDateTime_SystemIsReturned() {
-			var family = TsType.GetTypeFamily(typeof(DateTime));
+        [Fact]
+        public void WhenGetTypeFamilyForDateTime_SystemIsReturned()
+        {
+            var family = TsType.GetTypeFamily(typeof(DateTime));
 
-			Assert.Equal(TsTypeFamily.System, family);
-		}
+            Assert.Equal(TsTypeFamily.System, family);
+        }
 
-		[Fact]
-		public void WhenGetTypeFamilyForDecimal_SystemIsReturned() {
-			var family = TsType.GetTypeFamily(typeof(decimal));
+        [Fact]
+        public void WhenGetTypeFamilyForDecimal_SystemIsReturned()
+        {
+            var family = TsType.GetTypeFamily(typeof(decimal));
 
-			Assert.Equal(TsTypeFamily.System, family);
-		}
+            Assert.Equal(TsTypeFamily.System, family);
+        }
 
-		[Fact]
-		public void WhenGetTypeFamilyForClass_ClassIsReturned() {
-			var family = TsType.GetTypeFamily(typeof(Address));
+        [Fact]
+        public void WhenGetTypeFamilyForClass_ClassIsReturned()
+        {
+            var family = TsType.GetTypeFamily(typeof(Address));
 
-			Assert.Equal(TsTypeFamily.Class, family);
-		}
+            Assert.Equal(TsTypeFamily.Class, family);
+        }
 
-		[Fact]
-		public void WhenGetTypeFamilyForEnum_EnumIsReturned() {
-			var family = TsType.GetTypeFamily(typeof(CustomerKind));
+        [Fact]
+        public void WhenGetTypeFamilyForEnum_EnumIsReturned()
+        {
+            var family = TsType.GetTypeFamily(typeof(CustomerKind));
 
-			Assert.Equal(TsTypeFamily.Enum, family);
-		}
+            Assert.Equal(TsTypeFamily.Enum, family);
+        }
 
-		[Fact]
-		public void WhenGetTypeFamilyForIEnumerable_ClassIsReturned() {
-			var family = TsType.GetTypeFamily(typeof(List<int>));
+        [Fact]
+        public void WhenGetTypeFamilyForIEnumerable_ClassIsReturned()
+        {
+            var family = TsType.GetTypeFamily(typeof(List<int>));
 
-			Assert.Equal(TsTypeFamily.Collection, family);
-		}
+            Assert.Equal(TsTypeFamily.Collection, family);
+        }
 
-		[Fact]
-		public void WhenGetTypeFamilyForObject_TypeIsReturned() {
-			var family = TsType.GetTypeFamily(typeof(object));
+        [Fact]
+        public void WhenGetTypeFamilyForObject_TypeIsReturned()
+        {
+            var family = TsType.GetTypeFamily(typeof(object));
 
-			Assert.Equal(TsTypeFamily.Type, family);
-		}
+            Assert.Equal(TsTypeFamily.Type, family);
+        }
 
-		[Fact]
-		public void WhenGetTypeFamilyForStruct_ClassIsReturned() {
-			var family = TsType.GetTypeFamily(typeof(PointStruct));
+        [Fact]
+        public void WhenGetTypeFamilyForStruct_ClassIsReturned()
+        {
+            var family = TsType.GetTypeFamily(typeof(PointStruct));
 
-			Assert.Equal(TsTypeFamily.Class, family);
-		}
+            Assert.Equal(TsTypeFamily.Class, family);
+        }
 
-		[Fact]
-		public void WhenGetTypeFamilyForNullableSystemType_SystemTypeIsReturned() {
-			var family = TsType.GetTypeFamily(typeof(int?));
+        [Fact]
+        public void WhenGetTypeFamilyForNullableSystemType_SystemTypeIsReturned()
+        {
+            var family = TsType.GetTypeFamily(typeof(int?));
 
-			Assert.Equal(TsTypeFamily.System, family);
-		}
+            Assert.Equal(TsTypeFamily.System, family);
+        }
 
-		[Fact]
-		public void WhenGetTypeFamilyForNullableStruct_ClassIsReturned() {
-			var family = TsType.GetTypeFamily(typeof(PointStruct?));
+        [Fact]
+        public void WhenGetTypeFamilyForNullableStruct_ClassIsReturned()
+        {
+            var family = TsType.GetTypeFamily(typeof(PointStruct?));
 
-			Assert.Equal(TsTypeFamily.Class, family);
-		}
+            Assert.Equal(TsTypeFamily.Class, family);
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

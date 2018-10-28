@@ -4,49 +4,55 @@ using TypeLitePlus.Extensions;
 
 namespace TypeLitePlus.Tests.NetCore.Extensions
 {
-    public class TypeExtensionsTests {
+    public class TypeExtensionsTests
+    {
 
-		#region IsNullable tests
+        #region IsNullable tests
 
-		[Fact]
-		public void WhenIsNullableIsCalledWithNullableType_TrueIsReturned() {
-			var type = typeof(int?);
-			
-			Assert.True(type.IsNullable());
-		}
+        [Fact]
+        public void WhenIsNullableIsCalledWithNullableType_TrueIsReturned()
+        {
+            var type = typeof(int?);
 
-		[Fact]
-		public void WhenIsNullableIsCalledWithValueType_FalseIsReturned() {
-			var type = typeof(int);
-			
-			Assert.False(type.IsNullable());
-		}
+            Assert.True(type.IsNullable());
+        }
 
-		[Fact]
-		public void WhenIsNullableIsCalledWithReferenceType_FalseIsReturned() {
-			var type = typeof(string);
-			
-			Assert.False(type.IsNullable());
-		}
+        [Fact]
+        public void WhenIsNullableIsCalledWithValueType_FalseIsReturned()
+        {
+            var type = typeof(int);
 
-		#endregion
+            Assert.False(type.IsNullable());
+        }
 
-		#region GetNullableValueType tests
+        [Fact]
+        public void WhenIsNullableIsCalledWithReferenceType_FalseIsReturned()
+        {
+            var type = typeof(string);
 
-		[Fact]
-		public void WhenGetNullableValueTypeWithNullableValueType_ValueTypeIsReturned() {
-			var type = typeof(int?);
+            Assert.False(type.IsNullable());
+        }
 
-			Assert.Equal(typeof(int), type.GetNullableValueType());
-		}
+        #endregion
 
-		[Fact]
-		public void WhenGetNullableValueTypeWithNonNullableType_ExceptionIsThrown() {
-			var type = typeof(string);
+        #region GetNullableValueType tests
 
-			Assert.Throws<InvalidOperationException>(() => type.GetNullableValueType());
-		}
+        [Fact]
+        public void WhenGetNullableValueTypeWithNullableValueType_ValueTypeIsReturned()
+        {
+            var type = typeof(int?);
 
-		#endregion
-	}
+            Assert.Equal(typeof(int), type.GetNullableValueType());
+        }
+
+        [Fact]
+        public void WhenGetNullableValueTypeWithNonNullableType_ExceptionIsThrown()
+        {
+            var type = typeof(string);
+
+            Assert.Throws<InvalidOperationException>(() => type.GetNullableValueType());
+        }
+
+        #endregion
+    }
 }

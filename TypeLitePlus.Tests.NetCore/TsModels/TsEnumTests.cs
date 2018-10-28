@@ -5,18 +5,21 @@ using Xunit;
 
 namespace TypeLitePlus.Tests.NetCore.TsModels
 {
-    public class TsEnumTests {
+    public class TsEnumTests
+    {
 
-		[Fact]
-		public void WhenInitializedWithNonEnumType_ArgumentExceptionIsThrown() {
-			Assert.Throws<ArgumentException>(() => new TsEnum(typeof(Address)));
-		}
+        [Fact]
+        public void WhenInitializedWithNonEnumType_ArgumentExceptionIsThrown()
+        {
+            Assert.Throws<ArgumentException>(() => new TsEnum(typeof(Address)));
+        }
 
-		[Fact]
-		public void WhenInitialized_NameIsSet() {
-			var target = new TsEnum(typeof(ContactType));
+        [Fact]
+        public void WhenInitialized_NameIsSet()
+        {
+            var target = new TsEnum(typeof(ContactType));
 
-			Assert.Equal("ContactType", target.Name);
-		}
-	}
+            Assert.Equal("ContactType", target.Name);
+        }
+    }
 }

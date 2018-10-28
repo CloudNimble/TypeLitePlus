@@ -2,9 +2,11 @@
 
 namespace TypeLitePlus.Tests.NetCore.RegressionTests
 {
-    public class Issue41_EnumsInGenericClasses {
+    public class Issue41_EnumsInGenericClasses
+    {
         [Fact]
-        public void DoesNotThrowNullReferenceException_WhenEnumPropertyInGenericClass() {
+        public void DoesNotThrowNullReferenceException_WhenEnumPropertyInGenericClass()
+        {
 
             var ex = Record.Exception(() =>
             {
@@ -19,14 +21,16 @@ namespace TypeLitePlus.Tests.NetCore.RegressionTests
         }
 
         [TsClass]
-        public class Bob<T> {
+        public class Bob<T>
+        {
             public MyTestEnum MyEnum { get; set; }
             public string TestString { get; set; }
             public string MyProperty { get; set; }
         }
 
         [TsEnum]
-        public enum MyTestEnum {
+        public enum MyTestEnum
+        {
             One,
             Two,
             Three
