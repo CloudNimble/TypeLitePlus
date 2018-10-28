@@ -1,12 +1,14 @@
 ﻿#! "netcoreapp2.1"
 
 //INFO: Make sure you're getting the latest version here, Roslyn doesn't let you specify version ranges.
-#r "nuget: TypeLitePlus.Core, 2.0.1-CI-20181028-053456"
+//      See https://github.com/dotnet/roslyn/issues/30823
+#r "nuget: TypeLitePlus.Core, 2.0.1-CI-20181028-060241"
 
 //INFO: The commented line below is an example of using a NuGet package right in the script.
 //#r "nuget: NodaTime, 2.4.0"
 
-//INFO: The commented line below is an example of referencing an assembly from your project. Must be a relative reference.
+//INFO: The commented line below is an example of referencing an assembly from your project. 
+//      Must be a relative reference. This example assumes the script is in the root of the project.
 //#r "bin/Debug/netcoreapp2.1/YourNamespace.YourApp.YourComponent.dll"
 
 using System.IO;
