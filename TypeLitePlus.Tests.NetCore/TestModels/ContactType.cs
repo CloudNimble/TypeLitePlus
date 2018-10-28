@@ -2,6 +2,6 @@
 {
     public enum ContactType {
 		Personal,
-		Bussiness
+		Business
 	}
 }

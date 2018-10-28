@@ -256,7 +256,14 @@ namespace TypeLitePlus
         protected virtual void AppendModule(TsModule module, ScriptBuilder sb, TsGeneratorOutput generatorOutput)
         {
             var classes = module.Classes.Where(c => !_typeConvertors.IsConvertorRegistered(c.Type) && !c.IsIgnored).OrderBy(c => GetTypeName(c)).ToList();
-            var baseClasses = classes.Where(c => c.BaseType != null).Select(c => new TsClass(c.BaseType.Type)).Distinct().Where(c => !c.IsIgnored).OrderBy(c => GetTypeName(c)).ToList();
+            var baseClasses = classes
+                .Where(c => c.BaseType != null)
+                .Select(c => c.BaseType.Type)
+                .Distinct()
+                .Select(c => new TsClass(c))
+                .Where(c => !c.IsIgnored)
+                .OrderBy(c => GetTypeName(c))
+                .ToList();
             var enums = module.Enums.Where(e => !_typeConvertors.IsConvertorRegistered(e.Type) && !e.IsIgnored).OrderBy(e => GetTypeName(e)).ToList();
             if ((generatorOutput == TsGeneratorOutput.Enums && enums.Count == 0) ||
                 (generatorOutput == TsGeneratorOutput.Properties && classes.Count == 0) ||
