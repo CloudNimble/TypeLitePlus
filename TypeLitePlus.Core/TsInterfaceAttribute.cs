@@ -6,7 +6,8 @@ namespace TypeLitePlus
     /// Configures an interface to be included in the script model.
     /// </summary>
     [AttributeUsage(AttributeTargets.Interface, Inherited = false, AllowMultiple = false)]
-    public sealed class TsInterfaceAttribute : Attribute {
+    public sealed class TsInterfaceAttribute : Attribute
+    {
         /// <summary>
         /// Gets or sets the name of the interface in the script model. If it isn't set, the name of the CLR interface is used.
         /// </summary>

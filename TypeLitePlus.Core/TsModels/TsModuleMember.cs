@@ -5,22 +5,28 @@ namespace TypeLitePlus.TsModels
     /// <summary>
     /// Represents a type that can be places inside module
     /// </summary>
-    public abstract class TsModuleMember : TsType {
+    public abstract class TsModuleMember : TsType
+    {
         private TsModule _module;
 
         /// <summary>
         /// Gets or sets module, that contains this class.
         /// </summary>
-        public TsModule Module {
-            get {
+        public TsModule Module
+        {
+            get
+            {
                 return _module;
             }
-            set {
-                if (_module != null) {
+            set
+            {
+                if (_module != null)
+                {
                     _module.Remove(this);
                 }
                 _module = value;
-                if (_module != null) {
+                if (_module != null)
+                {
                     _module.Add(this);
                 }
             }
@@ -36,11 +42,13 @@ namespace TypeLitePlus.TsModels
         /// </summary>
         /// <param name="type">The CLR type represented by this instance of the ModuleMember</param>
         protected TsModuleMember(Type type)
-            : base(type) {
+            : base(type)
+        {
 
             var moduleName = string.Empty;
             var declaringType = type.DeclaringType;
-            while (declaringType != null) {
+            while (declaringType != null)
+            {
                 moduleName = "." + declaringType.Name + moduleName;
                 declaringType = declaringType.DeclaringType;
             }

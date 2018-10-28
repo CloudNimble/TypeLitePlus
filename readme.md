@@ -14,9 +14,24 @@ TypeLite Plus has been recompiled for .NET Standard 2.0, so it can be used in al
 
 ## Installation
 
-TypeLite Plus comes has 3 NuGet packages. In most cases, you'll just add the `TypeLitePlus` metapackage to your project. That package references the following packages:
+TypeLite Plus has 4 NuGet packages. In most cases, you'll just add the `TypeLitePlus` metapackage to your project. That package references the following packages:
 - `TypeLitePlus.Core`: the core library that contains all of the generator logic and attributes.
-- `TypeLitePlus.T4Templates`: contains the Example T4 template and the Manager.ttinclude file.
+- `TypeLitePlus.T4`: contains the Example T4 template and the Manager.ttinclude file.
+
+If you're building a .NET Core project, you're likely to run into issues where the Visual Studio reflection mechanism is loading .NET 
+Framework versions of certain DLLs instead of .NET Core versions. .NET Core does not have a concept of Assembly Binding Redirects, so
+there is no solution to the problem under the current Visual Studio architecture. This renders the T4 system unusable for .NET Core
+projects.
+
+There will be a fix coming in the .NET Core 3.0 timeframe. In the meantime, there's a different solution. DotNet-Script uses the Roslyn scripting APIs to execute
+CSX scripts on .NET Core. CSX files even let you pull in NuGet packages as references.
+
+First, you'll need to open a console and type `dotnet tool install -g dotnet-script`. That will install DotNet-Script into the .NET Core toolchain. Then
+you can use the following NuGet package:
+
+- `TypeLitePlus.DotNetScript`: contains the Example CSX script.
+
+More instructions TBD.
 
 ## Upgrading from TypeLITE
 
@@ -30,7 +45,7 @@ Please check [the project webpage](http://type.litesolutions.net/)
 
 The library is distributed under MIT license.
 
-## Showcase - projects using TypeLite & TypeLite Plus
+## Showcase - projects using TypeLite Plus
 * [MvcControllerToProxyGenerator](https://github.com/squadwuschel/MvcControllerToProxyGenerator)
 * [BurnRate](https://burnrate.io)
 * [Florida Agency for Health Care Administration](https://ahca.myflorida.com)
@@ -38,76 +53,77 @@ The library is distributed under MIT license.
 ## Changelog
 
 ### Version 2.0.0       (7 October 2018)
-Added       Rewritten for .NET Standard 2.0 support. Now works in any .NET Project now. 
-Fixed       Manager.tt is now powered by a scaled-back version of the TemplateFileManager that ships with EF6. It's lighter and easier to maintain than the previous one.
+Added:       Rewritten for .NET Standard 2.0 support. Now works in any .NET Project now.
+Added:       DotNet-Script support for consistently 
+Fixed:       Manager.tt is now powered by a scaled-back version of the TemplateFileManager that ships with EF6. It's lighter and easier to maintain than the previous one.
 
 ### Version 1.8.4       (2 March 2017)
-Fixed       #128 nested inner classes has incorrect module name
+Fixed:       #128 nested inner classes has incorrect module name
 
 ### Version 1.8.3       (2 March 2017)
-Fixed       Nested IEnumerables caused infinite loop
-Fixed       Use namespace instead of deprecated module keyword
+Fixed:       Nested IEnumerables caused infinite loop
+Fixed:       Use namespace instead of deprecated module keyword
 
 ### Version 1.8.2       (13 February 2017)
-Fixed       Do not generate empt modules
-Fixed       Export constants with const keyword
+Fixed:       Do not generate empty modules
+Fixed:       Export constants with const keyword
 
 ### Version 1.8.1       (7 April 2016)
-Added       Added ForReferencedAssembly extension method
+Added:       Added ForReferencedAssembly extension method
 
 ### Version 1.8.0       (3 April 2016)
-Fixed       #118, #113 Issues with Visual Studio 2015 Update 2
+Fixed:       #118, #113 Issues with Visual Studio 2015 Update 2
 
-Fixed       Error generating documentation with type params
+Fixed:       Error generating documentation with type params
 
 ### Version 1.7.0       (27 March 2016)
-Added       Added alternative generator for KnockoutModels (see https://bitbucket.org/svakinn/typelite/overview)
+Added:       Added alternative generator for KnockoutModels (see https://bitbucket.org/svakinn/typelite/overview)
 
-Fixed       #82 more deterministic ordering of generated code
+Fixed:       #82 more deterministic ordering of generated code
 
-Fixed       #103 types overridden in converter still appear in generated code
+Fixed:       #103 types overridden in converter still appear in generated code
 
-Added       New extension method that register all derived typesTypesDervivedFrom<T>
+Added:       New extension method that register all derived typesTypesDervivedFrom<T>
 
 ### Version 1.6.0       (22 January 2016)
-Fixed       #110 interface for classes with a base class
+Fixed:       #110 interface for classes with a base class
 
-Added       #109 support for System.Sbyte
+Added:       #109 support for System.Sbyte
 
 ### Version 1.5.2       (29 November 2015)
-Fixed       Error generating JsDoc in case of the name of the assembly contains a space
+Fixed:       Error generating JsDoc in case of the name of the assembly contains a space
 
 ### Version 1.5.1       (17 October 2015)
-Fixed       Problem with the binaries version in 1.5.0
+Fixed:       Problem with the binaries version in 1.5.0
 
 ### Version 1.5.0       (17 October 2015)
-Added       Implemented support for interface inheritance. 
+Added:       Implemented support for interface inheritance. 
 
-Added       Added support for [TsIgnore] attribute on classes
+Added:       Added support for [TsIgnore] attribute on classes
 
 ### Version 1.4.0       (7 August 2015)
-Added       #95, #96 Adds option to generate enums without 'const' modifier. Use TypeScript.AsConstEnums(false) in your TypeLite.tt file.
+Added:       #95, #96 Adds option to generate enums without 'const' modifier. Use TypeScript.AsConstEnums(false) in your TypeLite.tt file.
 
-Fixed       #94 TsGeneratorOutput isn't treated as flag in AppendEnumDefinition
+Fixed:       #94 TsGeneratorOutput isn't treated as flag in AppendEnumDefinition
 
 ### Version 1.3.1       (22 July 2015)
-Fixed       #90 export const enum for compatibility with TypeScript 1.5
+Fixed:       #90 export const enum for compatibility with TypeScript 1.5
 
 ### Version 1.3.0       (6 July 2015)
-Added       #89 Added support for Windows Phone 8.1 as target platform
+Added:       #89 Added support for Windows Phone 8.1 as target platform
 
-Added       #73 Added support for generating JSDoc comments from XML documentation. Works only in .NET 4, needs XML Doc files. Use .WithJSDoc()
+Added:       #73 Added support for generating JSDoc comments from XML documentation. Works only in .NET 4, needs XML Doc files. Use .WithJSDoc()
 
 ### Version 1.2.0       (1 July 2015)
-Added       #86 Support for classes outside modules. A TS class is generated outside module if the source .NET class isn't in a namespace or if  [TsClass(Module = "")] attribute is used.
+Added:       #86 Support for classes outside modules. A TS class is generated outside module if the source .NET class isn't in a namespace or if  [TsClass(Module = "")] attribute is used.
 
-Fixed       #79 ModuleNameForrmater not called in certain cases
+Fixed:       #79 ModuleNameForrmater not called in certain cases
 
 
 ### Version 1.1.2.0		(3 August 2015)
 Fixed		#85 Unable to reuse enums
 
-Fixed       #84 Module name formatter doesn't work for nested namespaces
+Fixed:       #84 Module name formatter doesn't work for nested namespaces
 
 ### Version 1.1.1.0		(1 March 2015)
 Fixed		#76 Error when renaming modules

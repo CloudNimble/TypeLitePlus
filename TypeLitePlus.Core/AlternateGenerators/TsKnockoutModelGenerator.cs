@@ -36,13 +36,14 @@ namespace TypeLitePlus.AlternateGenerators
                         continue;
                     var propTypeName = this.GetPropertyType(property);
                     if (property.PropertyType.IsCollection())
-                    { 
+                    {
                         //Note: new member functon checking if property is collection or not
                         //Also remove the array brackets from the name
-                        if (propTypeName.Length > 2 && propTypeName.Substring(propTypeName.Length-2) == "[]")
+                        if (propTypeName.Length > 2 && propTypeName.Substring(propTypeName.Length - 2) == "[]")
                             propTypeName = propTypeName.Substring(0, propTypeName.Length - 2);
                         propTypeName = "KnockoutObservableArray<" + propTypeName + ">";
-                    } else
+                    }
+                    else
                         propTypeName = "KnockoutObservable<" + propTypeName + ">";
                     sb.AppendLineIndented(string.Format("{0}: {1};", this.GetPropertyName(property), propTypeName));
                 }

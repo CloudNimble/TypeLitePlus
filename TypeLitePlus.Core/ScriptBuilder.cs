@@ -7,7 +7,8 @@ namespace TypeLitePlus
     /// <summary>
     /// Creates outptut script in memory 
     /// </summary>
-    public class ScriptBuilder {
+    public class ScriptBuilder
+    {
         private StringBuilder _internalBuilder;
 
         /// <summary>
@@ -23,14 +24,16 @@ namespace TypeLitePlus
         /// <summary>
         /// Initializes a new instance of the ScriptBuilder class
         /// </summary>
-        public ScriptBuilder() : this("\t") {
+        public ScriptBuilder() : this("\t")
+        {
         }
 
         /// <summary>
         /// Initializes a new instace of the ScriptBuilder class with the specific characters for indentation.
         /// </summary>
         /// <param name="indentation">The characters for indentation.</param>
-        public ScriptBuilder(string indentation) {
+        public ScriptBuilder(string indentation)
+        {
             _internalBuilder = new StringBuilder();
             this.IndentationString = indentation;
         }
@@ -39,7 +42,8 @@ namespace TypeLitePlus
         /// Inceases indentation by one level.
         /// </summary>
         /// <returns>An IndentationLevel object that represents a scope of the indentation.</returns>
-        public IndentationLevelScope IncreaseIndentation() {
+        public IndentationLevelScope IncreaseIndentation()
+        {
             this.IndentationLevels += 1;
             return new IndentationLevelScope(this);
         }
@@ -47,12 +51,15 @@ namespace TypeLitePlus
         /// <summary>
         /// Decreases indentation by one level.
         /// </summary>
-        internal void DecreaseIndentation(IndentationLevelScope indentationScope) {
-            if (indentationScope == null) {
+        internal void DecreaseIndentation(IndentationLevelScope indentationScope)
+        {
+            if (indentationScope == null)
+            {
                 throw new ArgumentNullException();
             }
 
-            if (this.IndentationLevels <= 0) {
+            if (this.IndentationLevels <= 0)
+            {
                 throw new InvalidOperationException("Indentation level is already set to zero.");
             }
 
@@ -63,14 +70,16 @@ namespace TypeLitePlus
         /// Appends the specified string to this instance
         /// </summary>
         /// <param name="value">the string to append</param>
-        public void Append(string value) {
+        public void Append(string value)
+        {
             _internalBuilder.Append(value);
         }
 
         /// <summary>
         /// Appends default line delimeter.
         /// </summary>
-        public void AppendLine() {
+        public void AppendLine()
+        {
             _internalBuilder.AppendLine();
         }
 
@@ -78,7 +87,8 @@ namespace TypeLitePlus
         /// Appends the specific string ot this instace of the ScriptBuilder followed by the default new line delimiter.
         /// </summary>
         /// <param name="value">the string to append</param>
-        public void AppendLine(string value) {
+        public void AppendLine(string value)
+        {
             _internalBuilder.AppendLine(value);
         }
 
@@ -87,14 +97,16 @@ namespace TypeLitePlus
         /// </summary>
         /// <param name="format">A composite format string</param>
         /// <param name="args">An array of objects to format</param>
-        public void AppendFormat(string format, params object[] args) {
+        public void AppendFormat(string format, params object[] args)
+        {
             _internalBuilder.AppendFormat(format, args);
         }
 
         /// <summary>
         /// Appends indentation.
         /// </summary>
-        public void AppendIndentation() {
+        public void AppendIndentation()
+        {
             _internalBuilder.Append(string.Concat(Enumerable.Repeat(this.IndentationString, this.IndentationLevels)));
         }
 
@@ -102,17 +114,19 @@ namespace TypeLitePlus
         /// Appends an indented string to the current instance of script builder.
         /// </summary>
         /// <param name="value">The string to append.</param>
-        public void AppendIndented(string value) {
+        public void AppendIndented(string value)
+        {
             this.AppendIndentation();
             this.Append(value);
         }
-        
+
         /// <summary>
         /// Appends a indented string returned by processing a composite format string. 
         /// </summary>
         /// <param name="format">A composite format string</param>
         /// <param name="args">An array of objects to format</param>
-        public void AppendFormatIndented(string format, params object[] args) {
+        public void AppendFormatIndented(string format, params object[] args)
+        {
             this.AppendIndentation();
             this.AppendFormat(format, args);
         }
@@ -121,7 +135,8 @@ namespace TypeLitePlus
         /// Appends an indented string followed by the default new line delimiter.
         /// </summary>
         /// <param name="value">The string to append</param>
-        public void AppendLineIndented(string value) {
+        public void AppendLineIndented(string value)
+        {
             this.AppendIndentation();
             this.AppendLine(value);
         }
@@ -130,7 +145,8 @@ namespace TypeLitePlus
         /// Converts value of this builder to a string.
         /// </summary>
         /// <returns></returns>
-        public override string ToString() {
+        public override string ToString()
+        {
             return _internalBuilder.ToString();
         }
 

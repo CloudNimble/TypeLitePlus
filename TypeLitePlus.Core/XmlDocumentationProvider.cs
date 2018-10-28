@@ -4,11 +4,13 @@ using System.Linq;
 using System.Reflection;
 using System.Xml.XPath;
 
-namespace TypeLitePlus {
+namespace TypeLitePlus
+{
     /// <summary>
     /// A custom <see cref="IDocumentationProvider"/> that reads the API documentation from an XML documentation file.
     /// </summary>
-    public class XmlDocumentationProvider {
+    public class XmlDocumentationProvider
+    {
         private XPathNavigator _documentNavigator;
         private const string TypeExpression = "/doc/members/member[@name='T:{0}']";
         private const string MethodExpression = "/doc/members/member[@name='M:{0}']";
@@ -20,15 +22,18 @@ namespace TypeLitePlus {
         /// Initializes a new instance of the <see cref="XmlDocumentationProvider"/> class.
         /// </summary>
         /// <param name="documentPath">The physical path to XML document.</param>
-        public XmlDocumentationProvider(string documentPath) {
-            if (documentPath == null) {
+        public XmlDocumentationProvider(string documentPath)
+        {
+            if (documentPath == null)
+            {
                 throw new ArgumentNullException("documentPath");
             }
             XPathDocument xpath = new XPathDocument(documentPath);
             _documentNavigator = xpath.CreateNavigator();
         }
 
-        public string GetDocumentation(MemberInfo member) {
+        public string GetDocumentation(MemberInfo member)
+        {
             string memberName = String.Format(CultureInfo.InvariantCulture, "{0}.{1}", GetTypeName(member.DeclaringType), member.Name);
             string expression = member.MemberType == MemberTypes.Field ? FieldExpression : PropertyExpression;
             string selectExpression = String.Format(CultureInfo.InvariantCulture, expression, memberName);
@@ -36,15 +41,18 @@ namespace TypeLitePlus {
             return GetTagValue(propertyNode, "summary");
         }
 
-        public string GetDocumentation(Type type) {
+        public string GetDocumentation(Type type)
+        {
             XPathNavigator typeNode = GetTypeNode(type);
             return GetTagValue(typeNode, "summary");
         }
 
-        private static string GetMemberName(MethodInfo method) {
+        private static string GetMemberName(MethodInfo method)
+        {
             string name = String.Format(CultureInfo.InvariantCulture, "{0}.{1}", GetTypeName(method.DeclaringType), method.Name);
             ParameterInfo[] parameters = method.GetParameters();
-            if (parameters.Length != 0) {
+            if (parameters.Length != 0)
+            {
                 string[] parameterTypeNames = parameters.Select(param => GetTypeName(param.ParameterType)).ToArray();
                 name += String.Format(CultureInfo.InvariantCulture, "({0})", String.Join(",", parameterTypeNames));
             }
@@ -52,10 +60,13 @@ namespace TypeLitePlus {
             return name;
         }
 
-        private static string GetTagValue(XPathNavigator parentNode, string tagName) {
-            if (parentNode != null) {
+        private static string GetTagValue(XPathNavigator parentNode, string tagName)
+        {
+            if (parentNode != null)
+            {
                 XPathNavigator node = parentNode.SelectSingleNode(tagName);
-                if (node != null) {
+                if (node != null)
+                {
                     return node.Value.Trim();
                 }
             }
@@ -63,15 +74,18 @@ namespace TypeLitePlus {
             return null;
         }
 
-        private XPathNavigator GetTypeNode(Type type) {
+        private XPathNavigator GetTypeNode(Type type)
+        {
             string controllerTypeName = GetTypeName(type);
             string selectExpression = String.Format(CultureInfo.InvariantCulture, TypeExpression, controllerTypeName);
             return _documentNavigator.SelectSingleNode(selectExpression);
         }
 
-        private static string GetTypeName(Type type) {
+        private static string GetTypeName(Type type)
+        {
             string name = type.FullName;
-            if (type.IsGenericType) {
+            if (type.IsGenericType)
+            {
                 // Format the generic type name to something like: Generic{System.Int32,System.String}
                 Type genericType = type.GetGenericTypeDefinition();
                 Type[] genericArguments = type.GetGenericArguments();
@@ -82,7 +96,8 @@ namespace TypeLitePlus {
                 string[] argumentTypeNames = genericArguments.Select(t => GetTypeName(t)).ToArray();
                 name = String.Format(CultureInfo.InvariantCulture, "{0}{{{1}}}", genericTypeName, String.Join(",", argumentTypeNames));
             }
-            if (type.IsNested) {
+            if (type.IsNested)
+            {
                 // Changing the nested type name from OuterType+InnerType to OuterType.InnerType to match the XML documentation syntax.
                 if (name != null) name = name.Replace("+", ".");
             }

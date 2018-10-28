@@ -15,8 +15,8 @@ namespace TypeLitePlus.AlternateGenerators
             string typeName = this.GetTypeName(classModel);
             string visibility = this.GetTypeVisibility(classModel, typeName) ? "export " : "";
             sb.AppendFormatIndented(
-                "{0}class {1} extends {2}", 
-                visibility, 
+                "{0}class {1} extends {2}",
+                visibility,
                 typeName,
                 //all bottom-level classes must extend Backbone.Model.
                 classModel.BaseType != null ? this.GetFullyQualifiedTypeName(classModel.BaseType) : "Backbone.Model");

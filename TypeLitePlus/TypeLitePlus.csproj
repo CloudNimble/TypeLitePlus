@@ -16,7 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TypeLitePlus.Core\TypeLitePlus.Core.csproj" />
-    <ProjectReference Include="..\TypeLitePlus.T4Templates\TypeLitePlus.T4Templates.csproj" />
+    <ProjectReference Include="..\TypeLitePlus.T4\TypeLitePlus.T4.csproj" />
   </ItemGroup>
 
 </Project>

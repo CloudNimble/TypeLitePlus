@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <Authors>Lukas Kabrt, Robert McLaws, and contributors.</Authors>
+    <Version>2.0.0</Version>
+    <Description>Generates TypeScript classes or interfaces from .Net Standard 2.0 classes. This package uses the DotNet.Script toolchain to run .csx files to generate your TypeScript classes in .NET Core apps.</Description>
+    <Copyright>Copyright &amp;copy; 2018 Lukas Kabrt, Robert McLaws, and CloudNimble, Inc.</Copyright>
+    <PackageProjectUrl>http://type.litesolutions.net</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/CloudNimble/TypeLitePlus</RepositoryUrl>
+    <PackageTags>TypeScript, TypeLite, d.ts</PackageTags>
+    <PackageLicenseUrl>https://choosealicense.com/licenses/mit/</PackageLicenseUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="TypeLite.csx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="TypeLite.csx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+</Project>

@@ -5,52 +5,63 @@ using System.Linq;
 using System.Reflection;
 using TypeLitePlus.TsModels;
 
-namespace TypeLitePlus {
+namespace TypeLitePlus
+{
     /// <summary>
     /// ts document appender
     /// </summary>
-    public class DocAppender : IDocAppender {
+    public class DocAppender : IDocAppender
+    {
         /// <summary>
         /// xml doc provider cache
         /// </summary>
         protected Dictionary<string, XmlDocumentationProvider> _providers;
 
-        public DocAppender() {
+        public DocAppender()
+        {
             _providers = new Dictionary<string, XmlDocumentationProvider>();
         }
 
-        public void AppendClassDoc(ScriptBuilder sb, TsClass classModel, string className) {
+        public void AppendClassDoc(ScriptBuilder sb, TsClass classModel, string className)
+        {
             AppendModelDoc(sb, classModel.Type);
         }
 
-        public void AppendPropertyDoc(ScriptBuilder sb, TsProperty property, string propertyName, string propertyType) {
+        public void AppendPropertyDoc(ScriptBuilder sb, TsProperty property, string propertyName, string propertyType)
+        {
             AppendMemberDoc(sb, property.MemberInfo);
         }
 
-        public void AppendConstantModuleDoc(ScriptBuilder sb, TsProperty property, string propertyName, string propertyType) {
+        public void AppendConstantModuleDoc(ScriptBuilder sb, TsProperty property, string propertyName, string propertyType)
+        {
             AppendMemberDoc(sb, property.MemberInfo);
         }
 
-        public void AppendEnumDoc(ScriptBuilder sb, TsEnum enumModel, string enumName) {
+        public void AppendEnumDoc(ScriptBuilder sb, TsEnum enumModel, string enumName)
+        {
             AppendModelDoc(sb, enumModel.Type);
         }
 
-        public void AppendEnumValueDoc(ScriptBuilder sb, TsEnumValue value) {
+        public void AppendEnumValueDoc(ScriptBuilder sb, TsEnumValue value)
+        {
             AppendMemberDoc(sb, value.Field);
         }
 
-        private XmlDocumentationProvider GetXmlDocProvider(Assembly assembly) {
+        private XmlDocumentationProvider GetXmlDocProvider(Assembly assembly)
+        {
             var xmlPath = FindXmlDocPath(assembly);
 
             System.Diagnostics.Debug.Print("GetXmlDocProvider {0}", xmlPath);
-            if (xmlPath == null || File.Exists(xmlPath) == false) {
+            if (xmlPath == null || File.Exists(xmlPath) == false)
+            {
                 System.Diagnostics.Debug.Print("GetXmlDocProvider not found");
                 return null;
             }
 
             var key = xmlPath.ToLower();
             XmlDocumentationProvider provider;
-            if (_providers.TryGetValue(key, out provider) == false) {
+            if (_providers.TryGetValue(key, out provider) == false)
+            {
                 provider = new XmlDocumentationProvider(xmlPath);
                 _providers[key] = provider;
             }
@@ -58,13 +69,15 @@ namespace TypeLitePlus {
             return provider;
         }
 
-        private string FindXmlDocPath(Assembly assembly) {
+        private string FindXmlDocPath(Assembly assembly)
+        {
             string asmPath = Uri.UnescapeDataString((new UriBuilder(assembly.CodeBase).Path));
             string xmlPath;
 
             // find same place
             xmlPath = Path.ChangeExtension(asmPath, ".xml");
-            if (File.Exists(xmlPath)) {
+            if (File.Exists(xmlPath))
+            {
                 return xmlPath;
             }
 
@@ -75,7 +88,8 @@ namespace TypeLitePlus {
                 @"Reference Assemblies\Microsoft\Framework\.NETFramework");
 
             var dirInfo = new DirectoryInfo(baseDir);
-            if (dirInfo.Exists) {
+            if (dirInfo.Exists)
+            {
                 // find v4.* etc. directory
                 var pattern = assembly.ImageRuntimeVersion.Substring(0, 2) + ".*";
                 var verDirs = dirInfo.GetDirectories(pattern)
@@ -84,9 +98,11 @@ namespace TypeLitePlus {
 
                 // find xml in version directory
                 var xmlName = Path.GetFileNameWithoutExtension(asmPath) + ".xml";
-                foreach (var verDir in verDirs) {
+                foreach (var verDir in verDirs)
+                {
                     xmlPath = Path.Combine(verDir.FullName, xmlName);
-                    if (File.Exists(xmlPath)) {
+                    if (File.Exists(xmlPath))
+                    {
                         return xmlPath;
                     }
                 }
@@ -96,14 +112,17 @@ namespace TypeLitePlus {
             return null;
         }
 
-        private void AppendModelDoc(ScriptBuilder sb, Type type) {
+        private void AppendModelDoc(ScriptBuilder sb, Type type)
+        {
             var provider = GetXmlDocProvider(type.Assembly);
-            if (provider == null) {
+            if (provider == null)
+            {
                 return;
             }
 
             var doc = provider.GetDocumentation(type);
-            if (string.IsNullOrWhiteSpace(doc)) {
+            if (string.IsNullOrWhiteSpace(doc))
+            {
                 return;
             }
 
@@ -116,14 +135,17 @@ namespace TypeLitePlus {
             sb.AppendLine();
         }
 
-        private void AppendMemberDoc(ScriptBuilder sb, MemberInfo member) {
+        private void AppendMemberDoc(ScriptBuilder sb, MemberInfo member)
+        {
             var provider = GetXmlDocProvider(member.DeclaringType.Assembly);
-            if (provider == null) {
+            if (provider == null)
+            {
                 return;
             }
 
             var doc = provider.GetDocumentation(member);
-            if (string.IsNullOrWhiteSpace(doc)) {
+            if (string.IsNullOrWhiteSpace(doc))
+            {
                 return;
             }
 
