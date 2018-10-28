@@ -293,7 +293,7 @@ namespace TypeLitePlus
                 if (generatorOutput != TsGeneratorOutput.Enums &&
                     (generatorOutput & TsGeneratorOutput.Constants) != TsGeneratorOutput.Constants)
                 {
-                    sb.Append(Mode == TsGenerationModes.Definitions ? "declare " : " export");
+                    sb.Append(Mode == TsGenerationModes.Definitions ? "declare " : " export ");
                 }
 
                 sb.AppendLine($"{(Mode == TsGenerationModes.Definitions ? "namespace" : "module")} {moduleName} {{");
