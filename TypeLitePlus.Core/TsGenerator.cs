@@ -45,6 +45,11 @@ namespace TypeLitePlus
         public bool GenerateConstEnums { get; set; }
 
         /// <summary>
+        /// Gets or sets the <see cref="TsGenerationModes">Mode</see> for generating the file. Defaults to <see cref="TsGenerationModes.Definitions"/>.
+        /// </summary>
+        public TsGenerationModes Mode { get; set; }
+
+        /// <summary>
         /// Initializes a new instance of the TsGenerator class with the default formatters.
         /// </summary>
         public TsGenerator()
@@ -64,8 +69,7 @@ namespace TypeLitePlus
             _typeFormatters.RegisterTypeFormatter<TsCollection>((type, formatter) =>
             {
                 var itemType = ((TsCollection)type).ItemsType;
-                var itemTypeAsClass = itemType as TsClass;
-                if (itemTypeAsClass == null || !itemTypeAsClass.GenericArguments.Any()) return this.GetTypeName(itemType);
+                if (!(itemType is TsClass itemTypeAsClass) || !itemTypeAsClass.GenericArguments.Any()) return this.GetTypeName(itemType);
                 return this.GetTypeName(itemType);
             });
             _typeFormatters.RegisterTypeFormatter<TsEnum>((type, formatter) => ((TsEnum)type).Name);
@@ -81,11 +85,12 @@ namespace TypeLitePlus
 
             this.IndentationString = "\t";
             this.GenerateConstEnums = true;
+            this.Mode = TsGenerationModes.Definitions;
         }
 
         public bool DefaultTypeVisibilityFormatter(TsClass tsClass, string typeName)
         {
-            return false;
+            return Mode == TsGenerationModes.Definitions ? false : true;
         }
 
         public string DefaultModuleNameFormatter(TsModule module)
@@ -288,10 +293,10 @@ namespace TypeLitePlus
                 if (generatorOutput != TsGeneratorOutput.Enums &&
                     (generatorOutput & TsGeneratorOutput.Constants) != TsGeneratorOutput.Constants)
                 {
-                    sb.Append("declare ");
+                    sb.Append(Mode == TsGenerationModes.Definitions ? "declare " : " export");
                 }
 
-                sb.AppendLine(string.Format("namespace {0} {{", moduleName));
+                sb.AppendLine($"{(Mode == TsGenerationModes.Definitions ? "namespace" : "module")} {moduleName} {{");
             }
 
             using (sb.IncreaseIndentation())
@@ -352,7 +357,7 @@ namespace TypeLitePlus
             string typeName = this.GetTypeName(classModel);
             string visibility = this.GetTypeVisibility(classModel, typeName) ? "export " : "";
             _docAppender.AppendClassDoc(sb, classModel, typeName);
-            sb.AppendFormatIndented("{0}interface {1}", visibility, typeName);
+            sb.AppendFormatIndented("{0}{1} {2}", visibility, Mode == TsGenerationModes.Definitions ? "interface" : "class", typeName);
             if (classModel.BaseType != null)
             {
                 sb.AppendFormat(" extends {0}", this.GetFullyQualifiedTypeName(classModel.BaseType));

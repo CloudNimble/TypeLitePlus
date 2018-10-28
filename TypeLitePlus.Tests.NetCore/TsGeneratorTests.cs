@@ -41,6 +41,57 @@ namespace TypeLitePlus.Tests.NetCore
         }
 
         [Fact]
+        public void WhenModeIsInterfaces_ClassesArentGenerated()
+        {
+            var builder = new TsModelBuilder();
+            builder.Add<Employee>();
+            builder.Add<User>();
+            var model = builder.Build();
+
+            var target = new TsGenerator();
+            var script = target.Generate(model);
+
+            var interfaceCount = Regex.Matches(script, Regex.Escape("interface")).Count;
+            Assert.True(interfaceCount > 0, script);
+
+            var namespaceCount = Regex.Matches(script, Regex.Escape("namespace")).Count;
+            Assert.True(namespaceCount > 0, script);
+
+            var classCount = Regex.Matches(script, Regex.Escape("class")).Count;
+            Assert.True(classCount == 0, script);
+
+            var moduleCount = Regex.Matches(script, Regex.Escape("module")).Count;
+            Assert.True(moduleCount == 0, script);
+        }
+
+        [Fact]
+        public void WhenModeIsClasses_InterfacesArentGenerated()
+        {
+            var builder = new TsModelBuilder();
+            builder.Add<Employee>();
+            builder.Add<User>();
+            var model = builder.Build();
+
+            var target = new TsGenerator
+            {
+                Mode = TsGenerationModes.Classes
+            };
+            var script = target.Generate(model);
+
+            var classCount = Regex.Matches(script, Regex.Escape("class")).Count;
+            Assert.True(classCount > 0, script);
+
+            var moduleCount = Regex.Matches(script, Regex.Escape("module")).Count;
+            Assert.True(moduleCount > 0, script);
+
+            var interfaceCount = Regex.Matches(script, Regex.Escape("interface")).Count;
+            Assert.True(interfaceCount == 0, script);
+
+            var namespaceCount = Regex.Matches(script, Regex.Escape("namespace")).Count;
+            Assert.True(namespaceCount == 0, script);
+        }
+
+        [Fact]
         public void WhenClassIsIgnored_InterfaceForClassIsntGenerated()
         {
             var builder = new TsModelBuilder();
