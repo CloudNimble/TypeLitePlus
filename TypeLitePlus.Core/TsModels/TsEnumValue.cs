@@ -18,6 +18,9 @@ namespace TypeLitePlus.TsModels
         /// </summary>
         public string Value { get; private set; }
 
+        /// <summary>
+        /// The Reflection API details about the Enum backing value.
+        /// </summary>
         public FieldInfo Field { get; private set; }
 
         /// <summary>

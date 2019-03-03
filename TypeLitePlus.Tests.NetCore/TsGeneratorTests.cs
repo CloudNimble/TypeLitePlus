@@ -378,6 +378,32 @@ namespace TypeLitePlus.Tests.NetCore
         }
 
         [Fact]
+        public void WhenEnumModeIsNumber_ValuesAreNumbers()
+        {
+            var builder = new TsModelBuilder();
+            builder.Add<TsEnumModes>();
+            var model = builder.Build();
+            var target = new TsGenerator();
+            target.EnumMode = TsEnumModes.Number;
+            var script = target.Generate(model, TsGeneratorOutput.Enums);
+
+            Assert.Contains("Number = 0", script);
+        }
+
+        [Fact]
+        public void WhenEnumModeIsString_ValuesAreStrings()
+        {
+            var builder = new TsModelBuilder();
+            builder.Add<TsEnumModes>();
+            var model = builder.Build();
+            var target = new TsGenerator();
+            target.EnumMode = TsEnumModes.String;
+            var script = target.Generate(model, TsGeneratorOutput.Enums);
+
+            Assert.Contains("Number = \"Number\"", script);
+        }
+
+        [Fact]
         public void WhenGenerate_OutputIsFormated()
         {
             var builder = new TsModelBuilder();
@@ -403,6 +429,9 @@ namespace TypeLitePlus.Tests.NetCore
                 }
             }
         }
+
         #endregion
+
     }
+
 }

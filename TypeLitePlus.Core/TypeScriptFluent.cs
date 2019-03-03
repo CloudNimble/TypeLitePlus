@@ -137,6 +137,17 @@ namespace TypeLitePlus
         }
 
         /// <summary>
+        /// Registers the Enum generation mode.
+        /// </summary>
+        /// <param name="mode">The <see cref="TsEnumModes"/> to register.</param>
+        /// <returns>Instance of the TypeScriptFluent that enables fluent configuration.</returns>
+        public TypeScriptFluent WithEnumMode(TsEnumModes mode)
+        {
+            _scriptGenerator.EnumMode = mode;
+            return this;
+        }
+
+        /// <summary>
         /// Sets a string for single indentation level in the output
         /// </summary>
         /// <param name="indentationString">The string used for the single indentation level.</param>

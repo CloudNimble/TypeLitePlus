@@ -50,6 +50,11 @@ namespace TypeLitePlus
         public TsGenerationModes Mode { get; set; }
 
         /// <summary>
+        /// Gets or sets the <see cref="TsEnumModes">Mode</see> for generating the file. Defaults to <see cref="TsEnumModes.Number"/>.
+        /// </summary>
+        public TsEnumModes EnumMode { get; set; }
+
+        /// <summary>
         /// Initializes a new instance of the TsGenerator class with the default formatters.
         /// </summary>
         public TsGenerator()
@@ -86,6 +91,7 @@ namespace TypeLitePlus
             this.IndentationString = "\t";
             this.GenerateConstEnums = true;
             this.Mode = TsGenerationModes.Definitions;
+            this.EnumMode = TsEnumModes.Number;
         }
 
         public bool DefaultTypeVisibilityFormatter(TsClass tsClass, string typeName)
@@ -415,7 +421,15 @@ namespace TypeLitePlus
                 foreach (var v in enumModel.Values)
                 {
                     _docAppender.AppendEnumValueDoc(sb, v);
-                    sb.AppendLineIndented(string.Format(i < enumModel.Values.Count ? "{0} = {1}," : "{0} = {1}", v.Name, v.Value));
+                    switch (EnumMode)
+                    {
+                        case TsEnumModes.String:
+                            sb.AppendLineIndented($"{v.Name} = \"{v.Name}\"{(i < enumModel.Values.Count ? "," : "")}");
+                            break;
+                        default:
+                            sb.AppendLineIndented($"{v.Name} = {v.Value}{(i < enumModel.Values.Count ? "," : "")}");
+                            break;
+                    }
                     i++;
                 }
             }
