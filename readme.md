@@ -20,8 +20,8 @@ TypeLite Plus has 4 NuGet packages. In most cases, you'll just add the `TypeLite
 
 If you're building a .NET Core project, you're likely to run into issues where the Visual Studio reflection mechanism is loading .NET 
 Framework versions of certain DLLs instead of .NET Core versions. .NET Core does not have a concept of Assembly Binding Redirects, so
-there is no solution to the problem under the current Visual Studio architecture. This renders the T4 system unusable for .NET Core
-projects.
+there is no solution to the problem under the current Visual Studio architecture. **This renders the T4 system unusable for .NET Core
+projects.**
 
 There will be a fix coming in the .NET Core 3.0 timeframe. In the meantime, there's a different solution. DotNet-Script uses the Roslyn scripting APIs to execute
 CSX scripts on .NET Core. CSX files even let you pull in NuGet packages as references.
@@ -52,9 +52,16 @@ The library is distributed under MIT license.
 
 ## Changelog
 
+### Version 2.1.0       (3 March 2019)
+Added:       Support for outputting Enum values as strings using the `.WithEnumMode(TsEnumModes.String)` option.
+
 ### Version 2.0.0       (7 October 2018)
-Added:       Rewritten for .NET Standard 2.0 support. Now works in any .NET Project now.
-Added:       DotNet-Script support for consistently 
+Added:       Rewritten for .NET Standard 2.0 support. Now works in any .NET project now.
+
+Added:       DotNet-Script support for executing in .NET Core application (due to differences in reflection contexts between VS and .NET Core).
+
+Added:       Support for outputting types as concrete Classes using the `.WithMode(TsGenerationModes.Classes)` option.
+
 Fixed:       Manager.tt is now powered by a scaled-back version of the TemplateFileManager that ships with EF6. It's lighter and easier to maintain than the previous one.
 
 ### Version 1.8.4       (2 March 2017)
@@ -62,10 +69,12 @@ Fixed:       #128 nested inner classes has incorrect module name
 
 ### Version 1.8.3       (2 March 2017)
 Fixed:       Nested IEnumerables caused infinite loop
+
 Fixed:       Use namespace instead of deprecated module keyword
 
 ### Version 1.8.2       (13 February 2017)
 Fixed:       Do not generate empty modules
+
 Fixed:       Export constants with const keyword
 
 ### Version 1.8.1       (7 April 2016)
