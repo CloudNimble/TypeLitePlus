@@ -1,8 +1,8 @@
-﻿#! "netcoreapp2.1"
+﻿#! "netcoreapp3.1"
 
 //INFO: Make sure you're getting the latest version here, Roslyn doesn't let you specify version ranges.
 //      See https://github.com/dotnet/roslyn/issues/30823
-#r "nuget: TypeLitePlus.Core, 2.0.1-CI-20181028-060241"
+#r "nuget: TypeLitePlus.Core, 2.1.0"
 
 //INFO: The commented line below is an example of using a NuGet package right in the script.
 //#r "nuget: NodaTime, 2.4.0"
