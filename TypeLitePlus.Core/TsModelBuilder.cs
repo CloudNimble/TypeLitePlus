@@ -16,7 +16,16 @@ namespace TypeLitePlus
         /// Gets or sets collection of classes in the model being built.
         /// </summary>
         internal Dictionary<Type, TsClass> Classes { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         internal Dictionary<Type, TsEnum> Enums { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        internal Dictionary<string, int> ModuleSortOrders { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the TsModelBuilder class.
@@ -25,6 +34,7 @@ namespace TypeLitePlus
         {
             this.Classes = new Dictionary<Type, TsClass>();
             this.Enums = new Dictionary<Type, TsEnum>();
+            this.ModuleSortOrders = new Dictionary<string, int>();
         }
 
         /// <summary>
@@ -169,6 +179,14 @@ namespace TypeLitePlus
         {
             var model = new TsModel(this.Classes.Values, this.Enums.Values);
             model.RunVisitor(new TypeResolver(model));
+            foreach (KeyValuePair<string, int> entry in ModuleSortOrders)
+            {
+                var module = model.Modules.FirstOrDefault(c => c.Name == entry.Key);
+                if (module != null)
+                {
+                    module.SortOrder = entry.Value;
+                }
+            }
             return model;
         }
 

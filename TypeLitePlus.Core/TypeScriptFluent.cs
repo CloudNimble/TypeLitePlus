@@ -203,6 +203,18 @@ namespace TypeLitePlus
         }
 
         /// <summary>
+        /// Sets a manual sort order for a given module (C# namespace).
+        /// </summary>
+        /// <param name="moduleName">The module name to set the sort order for.</param>
+        /// <param name="sortOrder">The position the module should be written to in the output.</param>
+        /// <returns>Instance of the TypeScriptFluent that enables fluent configuration.</returns>
+        public TypeScriptFluent WithModuleSortOrder(string moduleName, int sortOrder)
+        {
+            _modelBuilder.ModuleSortOrders.Add(moduleName, sortOrder);
+            return this;
+        }
+
+        /// <summary>
         /// Registers a typescript reference file
         /// </summary>
         /// <param name="reference">Name of the d.ts typescript reference file</param>

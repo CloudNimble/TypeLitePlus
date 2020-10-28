@@ -5,6 +5,9 @@ using Xunit;
 using TypeLitePlus.Tests.NetCore.TestModels;
 using System.IO;
 using System.Text.RegularExpressions;
+using TypeLitePlus.Tests.NetCore.TestModels.Namespace2;
+using TypeLitePlus.Tests.NetCore.TestModels.Namespace1;
+using Microsoft.Extensions.DependencyModel;
 
 namespace TypeLitePlus.Tests.NetCore
 {
@@ -428,6 +431,39 @@ namespace TypeLitePlus.Tests.NetCore
                     }
                 }
             }
+        }
+
+        [Fact]
+        public void WhenSortOrderIsNotSpecified_Namespace1IsFirst()
+        {
+            var builder = new TsModelBuilder();
+            builder.Add<DifferentNamespaces_Class3>();
+            builder.Add<DifferentNamespaces_Class2>();
+            builder.Add<DifferentNamespaces_Class1>();
+
+            var model = builder.Build();
+
+            var target = new TsGenerator();
+            var script = target.Generate(model);
+
+            Assert.True(script.IndexOf("TypeLitePlus.Tests.NetCore.TestModels.Namespace2") > script.IndexOf("TypeLitePlus.Tests.NetCore.TestModels.Namespace1"));
+        }
+
+        [Fact]
+        public void WhenSortOrderIsSpecified_Namespace2IsFirst()
+        {
+            var builder = new TsModelBuilder();
+            builder.Add<DifferentNamespaces_Class3>();
+            builder.Add<DifferentNamespaces_Class2>();
+            builder.Add<DifferentNamespaces_Class1>();
+
+            builder.ModuleSortOrders.Add("TypeLitePlus.Tests.NetCore.TestModels.Namespace2", 0);
+            var model = builder.Build();
+
+            var target = new TsGenerator();
+            var script = target.Generate(model);
+
+            Assert.True(script.IndexOf("TypeLitePlus.Tests.NetCore.TestModels.Namespace2") < script.IndexOf("TypeLitePlus.Tests.NetCore.TestModels.Namespace1"));
         }
 
         #endregion

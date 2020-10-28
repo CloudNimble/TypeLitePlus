@@ -52,6 +52,9 @@ The library is distributed under MIT license.
 
 ## Changelog
 
+### Version 2.1.0       (27 October 2020)
+Added:       TypeScriptFluent.WithModuleSortOrder(namespace, number) to specify the module output order.
+
 ### Version 2.0.0       (7 October 2018)
 Added:       Rewritten for .NET Standard 2.0 support. Now works in any .NET Project now.
 Added:       DotNet-Script support for consistently 

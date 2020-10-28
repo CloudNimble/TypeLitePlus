@@ -245,7 +245,7 @@ namespace TypeLitePlus
 
             // We can't just sort by the module name, because a formatter can jump in and change it so
             // format by the desired target name
-            foreach (var module in model.Modules.OrderBy(m => GetModuleName(m)))
+            foreach (var module in model.Modules.OrderBy(c => c.SortOrder).ThenBy(m => GetModuleName(m)))
             {
                 this.AppendModule(module, sb, generatorOutput);
             }
@@ -299,7 +299,7 @@ namespace TypeLitePlus
                 if (generatorOutput != TsGeneratorOutput.Enums &&
                     (generatorOutput & TsGeneratorOutput.Constants) != TsGeneratorOutput.Constants)
                 {
-                    sb.Append(Mode == TsGenerationModes.Definitions ? "declare " : " export ");
+                    sb.Append(Mode == TsGenerationModes.Definitions ? "declare " : "export ");
                 }
 
                 sb.AppendLine($"{(Mode == TsGenerationModes.Definitions ? "namespace" : "module")} {moduleName} {{");

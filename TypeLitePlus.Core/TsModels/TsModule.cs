@@ -16,6 +16,11 @@ namespace TypeLitePlus.TsModels
         public string Name { get; set; }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public int SortOrder { get; set; } = 100;
+
+        /// <summary>
         /// Gets collection of classes in the module.
         /// </summary>
         public IEnumerable<TsClass> Classes
