@@ -1,4 +1,4 @@
-﻿#if !NETSTANDARD2_0 && !NETCOREAPP2_1 && !NETCOREAPP2_2
+﻿#if !NETSTANDARD2_0 && !NET6_0
 
 using System.Data.Spatial;
 using Xunit;

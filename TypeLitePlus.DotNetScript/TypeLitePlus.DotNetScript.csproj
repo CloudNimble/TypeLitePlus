@@ -9,9 +9,9 @@
     <PackageProjectUrl>http://type.litesolutions.net</PackageProjectUrl>
     <RepositoryUrl>https://github.com/CloudNimble/TypeLitePlus</RepositoryUrl>
     <PackageTags>TypeScript, TypeLite, d.ts</PackageTags>
-    <PackageLicenseUrl>https://choosealicense.com/licenses/mit/</PackageLicenseUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <IncludeBuildOutput>false</IncludeBuildOutput>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>

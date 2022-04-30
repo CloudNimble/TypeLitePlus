@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net480</TargetFrameworks>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <Version>2.0.0</Version>
     <Authors>Lukas Kabrt, Robert McLaws, and contributors.</Authors>
@@ -11,7 +11,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageProjectUrl>http://type.litesolutions.net</PackageProjectUrl>
     <RepositoryUrl>https://github.com/CloudNimble/TypeLitePlus</RepositoryUrl>
-    <PackageLicenseUrl>https://choosealicense.com/licenses/mit/</PackageLicenseUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
